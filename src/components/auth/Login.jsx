@@ -3,123 +3,111 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const navigateToRegistration = useNavigate();
-  const handleRegister = () => {
-    navigateToRegistration("/register");
-  };
+  const navigateToRegister = useNavigate();
   const navigateToHome = useNavigate();
-
-  const initialValues = {
+  const initailValues = {
     email: "",
     password: "",
   };
-  const [loginValues, setLoginValues] = useState(initialValues);
-  const [errors, setErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
-  const hanldeChange = (e) => {
+  const [LoginValues, setLoginValues] = useState(initailValues);
+  const [loginError, setLoginError] = useState({});
+  const [isSubmit, serIsSubmit] = useState(false);
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setLoginValues({ ...loginValues, [name]: value });
+    setLoginValues({ ...LoginValues, [name]: value });
   };
 
-  const hanldeLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationError = await validate(loginValues);
-    setErrors(validationError);
-    setIsSubmit(true);
+    const errors = await validate(LoginValues)
+    setLoginError(errors)
+    serIsSubmit(true);
   };
-  const validate = async (value) => {
+  const validate = async (values) => {
     const error = {};
-    if (!value.email) {
-      error.email = "Enter your email";
+    if (!values.email) {
+      error.email = "Please enter your email";
     }
-    if (!value.password) {
-      error.password = "Enter your password";
+    if (!values.password) {
+      error.password = "Please enter your password";
     }
-    const response = await axios.get("http://localhost:4000/users");
-    const users = response.data;
-    users.map(user => {
-      
-      if (user.email !== value.email) {
-        error.email = "Incorrect email";
-      }
-      if (user.password !== value.password) {
-        error.password = "Incorrect password";
-      }
-
-      return 0
-    });
-    
-    
+    if (Object.keys(error).length === 0) {
+      const users = await axios.get("http://localhost:4000/users");
+      const user = users.data;
+      user.forEach((obj) => {
+        if (values.email !== obj.email) {
+          error.email = "Your email is incorrect";
+        }
+        // if (values.email === obj.email) {
+        //   error.LoginEmail = "";
+        // }
+        if (values.password !== obj.password) {
+          error.password = "Your password is incorrect";
+        }
+        // if (values.password === obj.password) {
+        //   error.LoginPassword = "";
+        // }
+      });
+    }
     return error;
   };
-
-
-  const handleLoginNavigation = () => {
-    if (Object.keys(errors).length === 0 && isSubmit) {
-      navigateToHome("/");
-    }
-  };
   useEffect(() => {
-    if (Object.keys(errors).length === 0) {
-      handleLoginNavigation();
-    }
-  }, [errors,handleLoginNavigation]);
+    console.log(loginError);
 
+    if (Object.keys(loginError).length === 0 && isSubmit) {
+      console.log(LoginValues);
+      navigateToHome("/")
+    }
+  }, [loginError]);
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-500 to-purple-600">
-      <form onSubmit={hanldeLogin}>
-        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-          <h1 className="text-4xl font-bold text-center mb-6 text-gray-800">
-            Login
-          </h1>
-          <div>
-            <div>
-              <input
-                type="text"
-                placeholder="Email"
-                className="w-full mb-4 px-4 py-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-300"
-                onChange={hanldeChange}
-                name="email"
-                value={loginValues.email}
-              />
-              <p className="text-red-800">{errors.email}</p>
-            </div>
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 className="text-4xl font-bold text-center mb-6 text-gray-800">
+          Login
+        </h1>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <input
+              type="text"
+              placeholder="Email"
+              onChange={handleChange}
+              value={LoginValues.email}
+              name="email"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-300"
+            />
+            <p>{loginError.email}</p>
           </div>
-
-          <div>
-            <div>
-              <input
-                type="password"
-                placeholder="Password"
-                className="w-full mb-6 px-4 py-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-300"
-                onChange={hanldeChange}
-                name="password"
-                value={loginValues.password}
-              />
-            </div>
-            <div>
-              <p className="text-red-800">{errors.password}</p>
-            </div>
+          <div className="mb-6">
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={handleChange}
+              value={LoginValues.password}
+              name="password"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-300"
+            />
+            <p>{loginError.password}</p>
           </div>
           <button
-            className="w-full bg-purple-600 text-white py-3 rounded-md font-semibold hover:bg-purple-700 transition duration-300"
+            className="w-full bg-purple-600 text-white py-3 rounded-md font-semibold hover:bg-purple-700 transition duration-300 mb-4"
             type="submit"
           >
             Log In
           </button>
-          <div className="text-center mt-4">
-            <p className="text-gray-700">
-              Don't have an account?{" "}
-              <button
-                onClick={handleRegister}
-                className="text-purple-600 hover:underline focus:outline-none"
-              >
-                Create your <strong>Kicks</strong> account
-              </button>
-            </p>
-          </div>
+        </form>
+        <div className="text-center">
+          <p className="text-gray-700 mb-2">
+            Don't have an account?{" "}
+            <button
+              onClick={() => navigateToRegister("/register")}
+              className="text-purple-600 hover:underline focus:outline-none"
+            >
+              Create your <strong>Kicks</strong> account
+            </button>
+          </p>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
