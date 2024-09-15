@@ -20,8 +20,8 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const errors = await validate(LoginValues)
-    setLoginError(errors)
+    const errors = await validate(LoginValues);
+    setLoginError(errors);
     serIsSubmit(true);
   };
   const validate = async (values) => {
@@ -33,21 +33,21 @@ function Login() {
       error.password = "Please enter your password";
     }
     if (Object.keys(error).length === 0) {
-      const users = await axios.get("http://localhost:4000/users");
+      let users = {}
+      try {
+         users = await axios.get("http://localhost:4000/users");
+      } catch (error) {
+        console.log(error);
+      }
       const user = users.data;
       user.forEach((obj) => {
         if (values.email !== obj.email) {
           error.email = "Your email is incorrect";
         }
-        // if (values.email === obj.email) {
-        //   error.LoginEmail = "";
-        // }
+
         if (values.password !== obj.password) {
           error.password = "Your password is incorrect";
         }
-        // if (values.password === obj.password) {
-        //   error.LoginPassword = "";
-        // }
       });
     }
     return error;
@@ -57,7 +57,7 @@ function Login() {
 
     if (Object.keys(loginError).length === 0 && isSubmit) {
       console.log(LoginValues);
-      navigateToHome("/")
+      navigateToHome("/");
     }
   }, [loginError]);
   return (
