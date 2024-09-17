@@ -36,49 +36,34 @@ function Navbar() {
         <div className="flex items-center space-x-6">
           {/* Menu Items */}
           <ul className="hidden md:flex space-x-6">
-            <li>
+            {/* <li>
               <Link to="/all" className="hover:text-blue-700">All</Link>
+            </li> */}
+            <li>
+              <Link to="/men" className="hover:text-blue-700">
+                Men
+              </Link>
             </li>
             <li>
-              <Link to="/men" className="hover:text-blue-700">Men</Link>
+              <Link to="/women" className="hover:text-blue-700">
+                Women
+              </Link>
             </li>
             <li>
-              <Link to="/women" className="hover:text-blue-700">Women</Link>
-            </li>
-            {/* Dropdown for More */}
-            <li
-              className="relative cursor-pointer hover:text-blue-700"
-              onClick={toggleDropdown}
-            >
-              More
-              {/* Dropdown Menu */}
-              {showDropdown && (
-                <ul className="absolute top-full left-0 bg-blue-700 shadow-md mt-2 rounded-lg w-40">
-                  <li className="px-4 py-2 hover:bg-blue-600">
-                    <Link to="/kids">Kids</Link>
-                  </li>
-                  <li className="px-4 py-2 hover:bg-blue-600">
-                    <Link to="/football">Football</Link>
-                  </li>
-                  <li className="px-4 py-2 hover:bg-blue-600">
-                    <Link to="/casual">Casual</Link>
-                  </li>
-                  <li className="px-4 py-2 hover:bg-blue-600">
-                    <Link to="/running">Running</Link>
-                  </li>
-                </ul>
-              )}
+              <Link to="/kids" className="hover:text-blue-700">
+                Kids
+              </Link>
             </li>
           </ul>
 
           {/* Mobile Dropdown (Hamburger Menu) */}
-          <div className="md:hidden">
+          {/* <div className="md:hidden">
             <button
               onClick={toggleDropdown}
               className="p-2 focus:outline-none text-2xl"
             >
               &#9776; {/* Hamburger Icon */}
-            </button>
+          {/* </button>
             {showDropdown && (
               <ul className="absolute top-full left-0 bg-blue-700 shadow-md mt-2 rounded-lg w-40">
                 <li className="px-4 py-2 hover:bg-blue-600">
@@ -104,7 +89,7 @@ function Navbar() {
                 </li>
               </ul>
             )}
-          </div>
+          </div> */}
         </div>
 
         {/* Logo */}
@@ -145,9 +130,11 @@ function Navbar() {
           </div>
 
           {/* Cart Icon */}
-          <button className="p-2 rounded-full hover:bg-blue-700 transition-colors duration-300">
-            <FontAwesomeIcon icon={faCartShopping} className="text-2xl" />
-          </button>
+          <Link to={'/cart'}>
+            <button className="p-2 rounded-full hover:bg-blue-700 transition-colors duration-300">
+              <FontAwesomeIcon icon={faCartShopping} className="text-2xl" />
+            </button>
+          </Link>
 
           {/* Profile Icon */}
           <button
@@ -163,3 +150,29 @@ function Navbar() {
 }
 
 export default Navbar;
+
+{
+  /* <li
+className="relative cursor-pointer hover:text-blue-700"
+onClick={toggleDropdown}
+>
+More
+{/* Dropdown Menu */
+}
+// {showDropdown && (
+//   <ul className="absolute top-full left-0 bg-blue-700 shadow-md mt-2 rounded-lg w-40">
+//     <li className="px-4 py-2 hover:bg-blue-600">
+//       <Link to="/kids">Kids</Link>
+//     </li>
+//     <li className="px-4 py-2 hover:bg-blue-600">
+//       <Link to="/football">Football</Link>
+//     </li>
+//     <li className="px-4 py-2 hover:bg-blue-600">
+//       <Link to="/casual">Casual</Link>
+//     </li>
+//     <li className="px-4 py-2 hover:bg-blue-600">
+//       <Link to="/running">Running</Link>
+//     </li>
+//   </ul>
+// )}
+// </li> */}
