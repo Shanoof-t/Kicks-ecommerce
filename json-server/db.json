@@ -8,7 +8,15 @@
       "password": "123456"
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "id": "14",
+      "name": "Nike Gamma Force",
+      "imageURL": "https://imgs.search.brave.com/HxulVbhWF34RkrPtRK8-ig_GGeUNSgP-GHQxPSlboP0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTF1blh1ZVFBa0wu/anBn",
+      "price": 110,
+      "quantity": 1
+    }
+  ],
   "items": [
     {
       "id": "1",

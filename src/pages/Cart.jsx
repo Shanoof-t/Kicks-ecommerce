@@ -47,63 +47,67 @@ function Cart() {
               Items in your bag not reserved - check out now to make them yours.
             </h6>
           </div>
-          {cartItems.map((value) => {
-            return (
-              <div
-                key={value.id}
-                className="flex items-center justify-between border-b pb-4 mb-4"
-              >
-                <div className="w-24">
-                  <img
-                    src={value.imageURL}
-                    alt={value.name}
-                    className="w-full rounded-lg shadow-md"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-2 w-1/2">
-                  <h1 className="text-lg font-medium">{value.name}</h1>
-
-                  <div className="flex items-center gap-2">
-                    <button
-                      className="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded"
-                      onClick={() =>
-                        handleQuantity(value.id, value.quantity + 1)
-                      }
-                    >
-                      +
-                    </button>
-                    <input
-                      type="number"
-                      value={value.quantity}
-                      className="w-12 text-center border rounded"
-                      readOnly
+          {cartItems.length > 0 ? (
+            cartItems.map((value) => {
+              return (
+                <div
+                  key={value.id}
+                  className="flex items-center justify-between border-b pb-4 mb-4"
+                >
+                  <div className="w-24">
+                    <img
+                      src={value.imageURL}
+                      alt={value.name}
+                      className="w-full rounded-lg shadow-md"
                     />
-                    <button
-                      className="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded"
-                      onClick={() => {
-                        if (value.quantity > 0) {
-                          handleQuantity(value.id, value.quantity - 1);
+                  </div>
+
+                  <div className="flex flex-col gap-2 w-1/2">
+                    <h1 className="text-lg font-medium">{value.name}</h1>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        className="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded"
+                        onClick={() =>
+                          handleQuantity(value.id, value.quantity + 1)
                         }
-                      }}
-                    >
-                      -
+                      >
+                        +
+                      </button>
+                      <input
+                        type="number"
+                        value={value.quantity}
+                        className="w-12 text-center border rounded"
+                        readOnly
+                      />
+                      <button
+                        className="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded"
+                        onClick={() => {
+                          if (value.quantity > 0) {
+                            handleQuantity(value.id, value.quantity - 1);
+                          }
+                        }}
+                      >
+                        -
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <h1 className="text-xl font-semibold">${value.price}</h1>
+                    <button onClick={() => handleDelete(value.id)}>
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="text-red-500 hover:text-red-700"
+                      />
                     </button>
                   </div>
                 </div>
-
-                <div className="flex items-center gap-4">
-                  <h1 className="text-xl font-semibold">${value.price}</h1>
-                  <button onClick={() => handleDelete(value.id)}>
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      className="text-red-500 hover:text-red-700"
-                    />
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <h1>Cart is Empty</h1>
+          )}
         </div>
 
         {/* Order Summary */}
