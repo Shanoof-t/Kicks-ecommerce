@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -83,7 +84,7 @@ function Cart() {
                       <button
                         className="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded"
                         onClick={() => {
-                          if (value.quantity > 0) {
+                          if (value.quantity > 1) {
                             handleQuantity(value.id, value.quantity - 1);
                           }
                         }}
@@ -126,9 +127,11 @@ function Cart() {
             <h2>Total</h2>
             <h2>${totalPrice}</h2>
           </div>
-          <button className="w-full mt-6 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
-            Proceed to Checkout
-          </button>
+          <Link to={'/checkout'}>
+            <button className="w-full mt-6 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
+              Proceed to Checkout
+            </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -34,12 +34,12 @@ function Register() {
       error.lastName = "Last Name is required!";
     }
     if (!value.email) {
-      error.email = "Email Name is required!";
+      error.email = "Email is required!";
     } else if (!regex.test(value.email)) {
       error.email = "This is not a valid email";
     }
     if (!value.password) {
-      error.password = "Password Name is required!";
+      error.password = "Password is required!";
     } else if (value.password.length < 6) {
       error.password = "Password must be more than 6 characters";
     } else if (value.password.length > 10) {

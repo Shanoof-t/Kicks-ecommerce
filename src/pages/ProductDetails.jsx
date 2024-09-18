@@ -6,7 +6,7 @@ function ProductDetails() {
   const { productId } = useParams();
   const [items, setItems] = useState({});
   const [sizes, setSizes] = useState([]);
-  const [cartDetails, setCartDetails] = useState({});
+  const [size, setSize] = useState(0);
   useEffect(() => {
     axios.get(`http://localhost:4000/items?id=${productId}`).then((res) => {
       if (res.data.length > 0) {
@@ -23,6 +23,7 @@ function ProductDetails() {
       imageURL: items.imageURL,
       price: items.price,
       quantity: 1,
+      size: size,
     });
     alert("Product added");
   };
@@ -45,7 +46,7 @@ function ProductDetails() {
                     <button
                       className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-lg"
                       onClick={() => {
-                        setCartDetails((cartDetails.size = { value }));
+                        setSize(value);
                       }}
                     >
                       {value}
