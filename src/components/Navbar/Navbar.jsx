@@ -1,22 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo/Logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
   faUser,
   faCartShopping,
+  faTimes,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import { Transition } from "@headlessui/react";
+import axios from "axios";
 function Navbar() {
   const navigateLogin = useNavigate();
-
-  // State to handle dropdown visibility and search input toggle
   const [showDropdown, setShowDropdown] = useState(false);
   const [searchVisible, setSearchVisible] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [allItems, setAllItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  console.log(filteredItems);
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/items")
+      .then((res) => setAllItems(res.data))
+      .catch((err) => console.log(err.message));
+  }, []);
+  useEffect(() => {
+    if (searchText.trim().length > 0) {
+      const filtered = allItems.filter((item) =>
+        item.name.toLowerCase().includes(searchText.toLowerCase())
+      );
+      setFilteredItems(filtered);
+    }
+  }, [allItems, searchText]);
   const handleProfile = () => {
     navigateLogin("/login");
   };
@@ -36,9 +54,6 @@ function Navbar() {
         <div className="flex items-center space-x-6">
           {/* Menu Items */}
           <ul className="hidden md:flex space-x-6">
-            {/* <li>
-              <Link to="/all" className="hover:text-blue-700">All</Link>
-            </li> */}
             <li>
               <Link to="/men" className="hover:text-blue-700">
                 Men
@@ -57,39 +72,41 @@ function Navbar() {
           </ul>
 
           {/* Mobile Dropdown (Hamburger Menu) */}
-          {/* <div className="md:hidden">
+          <div className="md:hidden">
             <button
               onClick={toggleDropdown}
               className="p-2 focus:outline-none text-2xl"
+              aria-label="Toggle Menu"
             >
-              &#9776; {/* Hamburger Icon */}
-          {/* </button>
-            {showDropdown && (
-              <ul className="absolute top-full left-0 bg-blue-700 shadow-md mt-2 rounded-lg w-40">
-                <li className="px-4 py-2 hover:bg-blue-600">
-                  <Link to="/all">All</Link>
-                </li>
-                <li className="px-4 py-2 hover:bg-blue-600">
-                  <Link to="/men">Men</Link>
-                </li>
-                <li className="px-4 py-2 hover:bg-blue-600">
-                  <Link to="/women">Women</Link>
-                </li>
-                <li className="px-4 py-2 hover:bg-blue-600">
-                  <Link to="/kids">Kids</Link>
-                </li>
-                <li className="px-4 py-2 hover:bg-blue-600">
-                  <Link to="/football">Football</Link>
-                </li>
-                <li className="px-4 py-2 hover:bg-blue-600">
-                  <Link to="/casual">Casual</Link>
-                </li>
-                <li className="px-4 py-2 hover:bg-blue-600">
-                  <Link to="/running">Running</Link>
-                </li>
-              </ul>
-            )}
-          </div> */}
+              <FontAwesomeIcon icon={showDropdown ? faTimes : faBars} />
+            </button>
+            <Transition
+              show={showDropdown}
+              enter="transition ease-out duration-200 transform"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="transition ease-in duration-150 transform"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              {(ref) => (
+                <ul
+                  ref={ref}
+                  className="absolute top-full left-0 bg-blue-700 shadow-md mt-2 rounded-lg w-48"
+                >
+                  <li className="px-4 py-2 hover:bg-blue-600">
+                    <Link to="/men">Men</Link>
+                  </li>
+                  <li className="px-4 py-2 hover:bg-blue-600">
+                    <Link to="/women">Women</Link>
+                  </li>
+                  <li className="px-4 py-2 hover:bg-blue-600">
+                    <Link to="/kids">Kids</Link>
+                  </li>
+                </ul>
+              )}
+            </Transition>
+          </div>
         </div>
 
         {/* Logo */}
@@ -126,11 +143,20 @@ function Navbar() {
                   searchVisible ? "block" : "hidden"
                 }`}
               />
+              <div>
+                {filteredItems.map((value) => {
+                  return (
+                    <Link to={`/${value.gender}/${value.id}`}>
+                      <h6>{value.name}</h6>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
           {/* Cart Icon */}
-          <Link to={'/cart'}>
+          <Link to={"/cart"}>
             <button className="p-2 rounded-full hover:bg-blue-700 transition-colors duration-300">
               <FontAwesomeIcon icon={faCartShopping} className="text-2xl" />
             </button>
@@ -150,29 +176,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-{
-  /* <li
-className="relative cursor-pointer hover:text-blue-700"
-onClick={toggleDropdown}
->
-More
-{/* Dropdown Menu */
-}
-// {showDropdown && (
-//   <ul className="absolute top-full left-0 bg-blue-700 shadow-md mt-2 rounded-lg w-40">
-//     <li className="px-4 py-2 hover:bg-blue-600">
-//       <Link to="/kids">Kids</Link>
-//     </li>
-//     <li className="px-4 py-2 hover:bg-blue-600">
-//       <Link to="/football">Football</Link>
-//     </li>
-//     <li className="px-4 py-2 hover:bg-blue-600">
-//       <Link to="/casual">Casual</Link>
-//     </li>
-//     <li className="px-4 py-2 hover:bg-blue-600">
-//       <Link to="/running">Running</Link>
-//     </li>
-//   </ul>
-// )}
-// </li> */}
