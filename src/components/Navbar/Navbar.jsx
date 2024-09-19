@@ -65,24 +65,22 @@ function Navbar() {
     setIsSubmit(false);
   };
   return (
-    <header className="bg-white shadow-md py-3 rounded-b-2xl">
+    <header className="container bg-white shadow-md py-3 rounded-b-2xl"> 
+    {/* w-full fixed z-10  */}
       <div className="container mx-auto flex justify-between items-center px-4">
-        {/* Left Menu */}
         <div className="flex items-center space-x-8 ms-6">
-          {/* Menu Items */}
           <ul className="hidden md:flex space-x-8 text-sm font-semibold">
-            <li className="hover:text-orange-500">
+            <li className="hover:text-secondaryColor">
               <Link to="/men">Men</Link>
             </li>
-            <li className="hover:text-orange-500">
+            <li className="hover:text-secondaryColor">
               <Link to="/women">Women</Link>
             </li>
-            <li className="hover:text-orange-500">
+            <li className="hover:text-secondaryColor">
               <Link to="/kids">Kids</Link>
             </li>
           </ul>
 
-          {/* Mobile Dropdown (Hamburger Menu) */}
           <div className="md:hidden">
             <button
               onClick={toggleDropdown}
@@ -112,21 +110,21 @@ function Navbar() {
           </div>
         </div>
 
-        {/* Logo */}
         <div className="flex items-center">
           <Link to="/">
             <img src={logo} alt="KICKS Logo" className="h-6 md:h-6" />
           </Link>
         </div>
 
-        {/* Icons */}
-        <div className="flex items-center space-x-6 me-6">
-          {/* Search Icon and Input */}
+        <div className="flex items-center space-x-3 me-6">
           <div className="relative">
             <button onClick={toggleSearch} className="focus:outline-none">
-              <FontAwesomeIcon icon={faMagnifyingGlass} className="text-xl" />
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className="text-lg p-2"
+              />
             </button>
-            {/* Expanding Search Input */}
+
             <div
               className={`absolute top-full right-0 mt-2 bg-white text-black rounded-md shadow-md overflow-hidden transition-width duration-300 ${
                 searchVisible ? "w-64" : "w-0"
@@ -150,7 +148,7 @@ function Navbar() {
                       to={`/${value.gender}/${value.id}`}
                       onClick={handleItemClick}
                     >
-                      <h6 className="text-gray-700 hover:text-orange-500">
+                      <h6 className="text-gray-700 hover:text-secondaryColor">
                         {value.name}
                       </h6>
                     </Link>
@@ -162,22 +160,17 @@ function Navbar() {
             </div>
           </div>
 
-          {/* Cart Icon */}
           <Link to="/cart">
-            <button className="relative">
-              <FontAwesomeIcon icon={faCartShopping} className="text-xl" />
-              <span className="absolute -top-3 -right-3 bg-orange-500 text-white rounded-full text-xs px-1.5 py-0.5">
+            <button className="relative p-2">
+              <FontAwesomeIcon icon={faCartShopping} className="text-lg" />
+              <span className="absolute -top-1 -right-1 bg-secondaryColor text-white rounded-full text-xs px-1.5 py-0.5">
                 {cartItems.length}
               </span>
             </button>
           </Link>
 
-          {/* Profile Icon */}
-          <button
-            className="p-2 rounded-full hover:bg-orange-500 transition-colors duration-300"
-            onClick={handleProfile}
-          >
-            <FontAwesomeIcon icon={faUser} className="text-xl" />
+          <button className="p-2" onClick={handleProfile}>
+            <FontAwesomeIcon icon={faUser} className="text-lg" />
           </button>
         </div>
       </div>

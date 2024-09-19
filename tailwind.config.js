@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*/*.{js,jsx,ts,tsx}", // Include all JS/JSX files in the src folder
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'secondaryColor': "#FFA52F",
+      },
+    },
   },
   plugins: [],
-}
+};

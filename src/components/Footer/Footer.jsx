@@ -6,31 +6,42 @@ import {
   faFacebook,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
 function Footer() {
   return (
     <>
-      <footer className="bg-gray-800 text-white pt-8 md:pt-12 px-4 mb-12 rounded-3xl ">
-        <div className="flex flex-wrap justify-between gap-6">
+      <footer className="bg-gray-800 text-white pt-8 md:pt-12 md:px-12 px-4 my-12 rounded-3xl ">
+        <div className="flex flex-wrap justify-between gap-32">
           <div className="flex-1 min-w-[200px] max-w-[300px]">
-            <h2 className="text-xl md:text-2xl font-bold mb-4">About Us</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-4 text-secondaryColor">
+              About Us
+            </h2>
             <p>
               We are the biggest hyperstore in the universe. <br /> We got you
               covered with our exclusive <br /> collections and latest drops.
             </p>
           </div>
           <div className="flex-1 min-w-[200px] max-w-[300px]">
-            <h2 className="text-xl md:text-2xl font-bold mb-4">Categories</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-4 text-secondaryColor">
+              Categories
+            </h2>
             <ul>
-              <li className="mb-2">Men</li>
-              <li className="mb-2">Women</li>
-              <li className="mb-2">Kids</li>
-              <li className="mb-2">Casual</li>
-              <li className="mb-2">Football</li>
-              <li className="mb-2">Runners</li>
+              <Link to={'men'}>
+                <li className="mb-2">Men</li>
+              </Link>
+              <Link to={'women'}>
+                <li className="mb-2">Women</li>
+              </Link>
+              <Link to={'kids'}>
+                <li className="mb-2">Kids</li>
+              </Link>
+              
             </ul>
           </div>
           <div className="flex-1 min-w-[200px] max-w-[300px]">
-            <h2 className="text-xl md:text-2xl font-bold mb-4">Company</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-4 text-secondaryColor">
+              Company
+            </h2>
             <ul>
               <li className="mb-2">About</li>
               <li className="mb-2">Contact</li>
@@ -38,7 +49,9 @@ function Footer() {
             </ul>
           </div>
           <div className="flex-1 min-w-[200px] max-w-[300px]">
-            <h2 className="text-xl md:text-2xl font-bold mb-4">Follow Us</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-4 text-secondaryColor">
+              Follow Us
+            </h2>
             <div className="flex space-x-4">
               <a
                 href="https://www.facebook.com"
@@ -67,7 +80,9 @@ function Footer() {
             </div>
           </div>
         </div>
-        <img src={logowhite} alt="" className="" />
+        <div className="mt-20">
+          <img src={logowhite} alt="" />
+        </div>
       </footer>
     </>
   );

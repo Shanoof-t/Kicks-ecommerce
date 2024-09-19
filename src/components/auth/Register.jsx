@@ -10,6 +10,7 @@ function Register() {
     email: "",
     password: "",
     confirmPassword: "",
+    gender:""
   };
   const [registerValues, setRegisterValues] = useState(initialValues);
   const [registerErrors, setRegisterErrors] = useState({});
@@ -51,8 +52,16 @@ function Register() {
       error.confirmPassword =
         "The passwords you entered do not match. Please try again.";
     }
+    if(!value.gender){
+      error.gender ="Select your gender"
+    }
     return error;
   };
+  const [gender,setGender]=useState('')
+  const hanldeGender = (gen) =>{
+    setGender(gen)
+    setRegisterValues({...registerValues,gender:{gen}})
+  }
   const handleRegistrationNavigation = () => {
     if (Object.keys(registerErrors).length === 0 && isSubmit) {
       axios
@@ -75,30 +84,31 @@ function Register() {
       handleRegistrationNavigation();
     }
   }, [registerErrors]);
+  
   return (
     <div className="flex justify-center">
-      <div className="w-2/4 ">
+      <div className="w-2/4 mt-5">
         <h1 className="text-4xl font-bold text-center">Register</h1>
         <form onSubmit={handleRegistration}>
           <div className="mb-6">
-            <h2 className="text-xl font-bold my-2 ">Your Name</h2>
+            <h2 className="text-xl font-bold my-2 mb-4">Your Name</h2>
             <div className="flex flex-col gap-4">
               <div>
                 <input
                   type="text"
                   placeholder="First Name"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-3 bg-transparent border border-black rounded-md text-gray-800 focus:outline-none focus:ring-0"
                   value={registerValues.firstName}
                   name="firstName"
                   onChange={hanldeChange}
                 />
-                <p className="text-red-600 my-1">{registerErrors.firstName}</p>
+                <p className="text-red-600 my-1 ">{registerErrors.firstName}</p>
               </div>
               <div>
                 <input
                   type="text"
                   placeholder="Last Name"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-3 bg-transparent border border-black rounded-md text-gray-800 focus:outline-none focus:ring-0"
                   value={registerValues.lastName}
                   name="lastName"
                   onChange={hanldeChange}
@@ -107,17 +117,39 @@ function Register() {
               </div>
             </div>
           </div>
+          <div className="mb-6">
+            <h2 className="text-xl font-bold my-2 mb-4">Gender</h2>
+            <div className="items-center ">
+              <label className="inline-flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  className="form-checkbox h-4 w-4"
+                  checked={gender === 'male'}
+                  onChange={()=>hanldeGender('male')}
+                />
+                <span className="font-medium">Male</span>
+              </label>
+              <label className="inline-flex items-center space-x-2 ms-5">
+                <input
+                  type="checkbox"
+                  className="form-checkbox h-4 w-4"
+                  checked={gender === 'female'}
+                  onChange={()=>hanldeGender('female')}
+                />
+                <span className="font-medium">Female</span>
+              </label>
+              <p className="text-red-600 my-1">{registerErrors.gender}</p>
+            </div>
+          </div>
 
           <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2 text-gray-700">
-              Login Details
-            </h2>
+            <h2 className="text-xl font-bold my-2 mb-4">Login Details</h2>
             <div className="flex flex-col gap-4">
               <div>
                 <input
                   type="email"
                   placeholder="Email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-3 bg-transparent border border-black rounded-md text-gray-800 focus:outline-none focus:ring-0"
                   onChange={hanldeChange}
                   name="email"
                   value={registerValues.email}
@@ -128,7 +160,7 @@ function Register() {
                 <input
                   type="password"
                   placeholder="Password"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-3 bg-transparent border border-black rounded-md text-gray-800 focus:outline-none focus:ring-0"
                   onChange={hanldeChange}
                   name="password"
                   value={registerValues.password}
@@ -139,7 +171,7 @@ function Register() {
                 <input
                   type="password"
                   placeholder="Confirm Password"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-3 bg-transparent border border-black rounded-md text-gray-800 focus:outline-none focus:ring-0"
                   onChange={hanldeChange}
                   name="confirmPassword"
                   value={registerValues.confirmPassword}
