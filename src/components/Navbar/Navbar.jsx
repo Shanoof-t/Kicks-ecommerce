@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import logo from "../../assets/logo/Logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,21 +12,27 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import axios from "axios";
+
 function Navbar() {
-  const navigateLogin = useNavigate();
+  const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
   const [searchVisible, setSearchVisible] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [allItems, setAllItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-  console.log(filteredItems);
-
+  const [cartItems, setCartItems] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:4000/cart").then((res) => {
+      setCartItems(res.data);
+    });
+  }, [cartItems]);
   useEffect(() => {
     axios
       .get("http://localhost:4000/items")
       .then((res) => setAllItems(res.data))
       .catch((err) => console.log(err.message));
   }, []);
+
   useEffect(() => {
     if (searchText.trim().length > 0) {
       const filtered = allItems.filter((item) =>
@@ -35,8 +41,9 @@ function Navbar() {
       setFilteredItems(filtered);
     }
   }, [allItems, searchText]);
+
   const handleProfile = () => {
-    navigateLogin("/login");
+    localStorage.length === 0 ? navigate("/login") : navigate("/profile");
   };
 
   const toggleDropdown = () => {
@@ -46,28 +53,32 @@ function Navbar() {
   const toggleSearch = () => {
     setSearchVisible(!searchVisible);
   };
+  const [isSubmit, setIsSubmit] = useState(false);
 
+  const handleSearchSubmit = useCallback((e) => {
+    e.preventDefault();
+    setIsSubmit(true);
+  }, []);
+  const handleItemClick = () => {
+    setSearchVisible(!searchVisible);
+    setSearchText("");
+    setIsSubmit(false);
+  };
   return (
-    <header className="bg-white shadow-lg text-black">
-      <div className="container mx-auto flex justify-between items-center p-4">
+    <header className="bg-white shadow-md py-3 rounded-b-2xl">
+      <div className="container mx-auto flex justify-between items-center px-4">
         {/* Left Menu */}
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-8 ms-6">
           {/* Menu Items */}
-          <ul className="hidden md:flex space-x-6">
-            <li>
-              <Link to="/men" className="hover:text-blue-700">
-                Men
-              </Link>
+          <ul className="hidden md:flex space-x-8 text-sm font-semibold">
+            <li className="hover:text-orange-500">
+              <Link to="/men">Men</Link>
             </li>
-            <li>
-              <Link to="/women" className="hover:text-blue-700">
-                Women
-              </Link>
+            <li className="hover:text-orange-500">
+              <Link to="/women">Women</Link>
             </li>
-            <li>
-              <Link to="/kids" className="hover:text-blue-700">
-                Kids
-              </Link>
+            <li className="hover:text-orange-500">
+              <Link to="/kids">Kids</Link>
             </li>
           </ul>
 
@@ -89,22 +100,14 @@ function Navbar() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              {(ref) => (
-                <ul
-                  ref={ref}
-                  className="absolute top-full left-0 bg-blue-700 shadow-md mt-2 rounded-lg w-48"
-                >
-                  <li className="px-4 py-2 hover:bg-blue-600">
-                    <Link to="/men">Men</Link>
-                  </li>
-                  <li className="px-4 py-2 hover:bg-blue-600">
-                    <Link to="/women">Women</Link>
-                  </li>
-                  <li className="px-4 py-2 hover:bg-blue-600">
-                    <Link to="/kids">Kids</Link>
-                  </li>
-                </ul>
-              )}
+              <ul className="absolute top-full left-0 bg-white shadow-md mt-2 rounded-lg w-48">
+                <li className="px-4 py-2 hover:bg-gray-100">
+                  <Link to="/men">Men</Link>
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-100">
+                  <Link to="/women">Women</Link>
+                </li>
+              </ul>
             </Transition>
           </div>
         </div>
@@ -112,62 +115,69 @@ function Navbar() {
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/">
-            <img
-              src={logo}
-              alt="Logo"
-              className="w-12 h-12 md:w-16 md:h-16 object-contain"
-            />
+            <img src={logo} alt="KICKS Logo" className="h-6 md:h-6" />
           </Link>
         </div>
 
         {/* Icons */}
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-6 me-6">
           {/* Search Icon and Input */}
           <div className="relative">
             <button onClick={toggleSearch} className="focus:outline-none">
-              <FontAwesomeIcon icon={faMagnifyingGlass} className="text-2xl" />
+              <FontAwesomeIcon icon={faMagnifyingGlass} className="text-xl" />
             </button>
-
             {/* Expanding Search Input */}
             <div
               className={`absolute top-full right-0 mt-2 bg-white text-black rounded-md shadow-md overflow-hidden transition-width duration-300 ${
                 searchVisible ? "w-64" : "w-0"
               }`}
             >
-              <input
-                type="text"
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                placeholder="Search..."
-                className={`w-full px-4 py-2 ${
-                  searchVisible ? "block" : "hidden"
-                }`}
-              />
-              <div>
-                {filteredItems.map((value) => {
-                  return (
-                    <Link to={`/${value.gender}/${value.id}`}>
-                      <h6>{value.name}</h6>
+              <form onSubmit={handleSearchSubmit}>
+                <input
+                  type="text"
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  placeholder="Search..."
+                  className={`w-full px-4 py-2 ${
+                    searchVisible ? "block" : "hidden"
+                  }`}
+                />
+              </form>
+              {isSubmit ? (
+                <div>
+                  {filteredItems.map((value) => (
+                    <Link
+                      to={`/${value.gender}/${value.id}`}
+                      onClick={handleItemClick}
+                    >
+                      <h6 className="text-gray-700 hover:text-orange-500">
+                        {value.name}
+                      </h6>
                     </Link>
-                  );
-                })}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
 
           {/* Cart Icon */}
-          <Link to={"/cart"}>
-            <button className="p-2 rounded-full hover:bg-blue-700 transition-colors duration-300">
-              <FontAwesomeIcon icon={faCartShopping} className="text-2xl" />
+          <Link to="/cart">
+            <button className="relative">
+              <FontAwesomeIcon icon={faCartShopping} className="text-xl" />
+              <span className="absolute -top-3 -right-3 bg-orange-500 text-white rounded-full text-xs px-1.5 py-0.5">
+                {cartItems.length}
+              </span>
             </button>
           </Link>
 
           {/* Profile Icon */}
           <button
-            className="p-2 rounded-full hover:bg-blue-700 transition-colors duration-300"
+            className="p-2 rounded-full hover:bg-orange-500 transition-colors duration-300"
             onClick={handleProfile}
           >
-            <FontAwesomeIcon icon={faUser} className="text-2xl" />
+            <FontAwesomeIcon icon={faUser} className="text-xl" />
           </button>
         </div>
       </div>

@@ -21,6 +21,8 @@ import KidsRunning from "./pages/Categories/Kids Categories/KidsRunning";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import OrderDetails from "./pages/OrderDetails";
 function App() {
   return (
     <div className="container mx-auto">
@@ -50,7 +52,9 @@ function App() {
         <Route path="kids/:productId" element={<ProductDetails />} />
         <Route path="cart" element={<Cart />} />
         <Route path="checkout" element={<Checkout />} />
-        <Route path="*" element={<NotFound />}/>
+        <Route path="profile" element={<Profile />} />
+        <Route path="orderdetails" element={<OrderDetails />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
@@ -127,7 +127,7 @@ function Cart() {
             <h2>Total</h2>
             <h2>${totalPrice}</h2>
           </div>
-          <Link to={'/checkout'}>
+          <Link to={totalPrice > 0 ? "/checkout" : ""}>
             <button className="w-full mt-6 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
               Proceed to Checkout
             </button>

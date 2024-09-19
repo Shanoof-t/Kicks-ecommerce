@@ -54,39 +54,34 @@ function Register() {
     return error;
   };
   const handleRegistrationNavigation = () => {
-   
     if (Object.keys(registerErrors).length === 0 && isSubmit) {
       axios
         .post("http://localhost:4000/users", {
           firstName: registerValues.firstName,
           lastName: registerValues.lastName,
           email: registerValues.email,
-          password: registerValues.password
+          password: registerValues.password,
         })
         .then((res) => {
           console.log(res.data);
-          
+
           navigateToHome("/login");
         })
         .catch((err) => console.log(err.message));
     }
   };
-  useEffect(()=>{
-    if(Object.keys(registerErrors).length === 0){
-      handleRegistrationNavigation()
+  useEffect(() => {
+    if (Object.keys(registerErrors).length === 0) {
+      handleRegistrationNavigation();
     }
-  },[registerErrors])
+  }, [registerErrors]);
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-green-400 to-blue-500">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-4xl font-bold text-center mb-6 text-gray-800">
-          Register
-        </h1>
+    <div className="flex justify-center">
+      <div className="w-2/4 ">
+        <h1 className="text-4xl font-bold text-center">Register</h1>
         <form onSubmit={handleRegistration}>
           <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2 text-gray-700">
-              Your Name
-            </h2>
+            <h2 className="text-xl font-bold my-2 ">Your Name</h2>
             <div className="flex flex-col gap-4">
               <div>
                 <input
@@ -157,7 +152,6 @@ function Register() {
           </div>
           <div>
             <button
-              
               type="submit"
               className="w-full bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-700 transition duration-300"
             >

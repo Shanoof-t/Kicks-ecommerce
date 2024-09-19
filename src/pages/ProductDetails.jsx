@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ProductDetails() {
   const { productId } = useParams();
   const [items, setItems] = useState({});
   const [sizes, setSizes] = useState([]);
   const [size, setSize] = useState(0);
+  const [sizeError, setSizeError] = useState("");
+
   useEffect(() => {
     axios.get(`http://localhost:4000/items?id=${productId}`).then((res) => {
       if (res.data.length > 0) {
@@ -17,57 +21,63 @@ function ProductDetails() {
   }, [productId]);
 
   const handleCart = () => {
-    axios.post("http://localhost:4000/cart", {
-      id: items.id,
-      name: items.name,
-      imageURL: items.imageURL,
-      price: items.price,
-      quantity: 1,
-      size: size,
-    });
-    alert("Product added");
+    size === 0
+      ? setSizeError("Choose shoe size")
+      : axios
+          .post("http://localhost:4000/cart", {
+            id: items.id,
+            name: items.name,
+            imageURL: items.imageURL,
+            price: items.price,
+            quantity: 1,
+            size: size,
+          })
+          .then(() => {
+            toast.success("Product added");
+          })
+          .catch((err) => {
+            toast.error(err.message);
+          });
   };
 
   return (
     <>
-      <div className="flex ">
-        <div>
-          <img src={items.imageURL} alt="" className="h-2/4" />
+      <ToastContainer />
+      <div className="container mx-auto p-6 md:flex md:space-x-6">
+        <div className="md:w-1/2">
+          <img src={items.imageURL} alt={items.name} className="w-full h-auto object-cover rounded-lg shadow-lg" />
         </div>
-        <div>
-          <h1>{items.name}</h1>
-          <h5>{items.price}</h5>
-          <div>
-            <h5>Size</h5>
-            <div className="flex">
-              {sizes.map((value, index) => {
-                return (
-                  <div key={index} className="m-10">
-                    <button
-                      className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-lg"
-                      onClick={() => {
-                        setSize(value);
-                      }}
-                    >
-                      {value}
-                    </button>
-                  </div>
-                );
-              })}
+        <div className="md:w-1/2 mt-6 md:mt-0">
+          <h1 className="text-3xl font-bold mb-4">{items.name}</h1>
+          <h5 className="text-xl text-gray-800 mb-4">${items.price}</h5>
+          <div className="mb-4">
+            <h5 className="text-lg font-semibold mb-2">Size</h5>
+            <div className="flex flex-wrap gap-2">
+              {sizes.map((value, index) => (
+                <button
+                  key={index}
+                  className={`px-4 py-2 rounded-lg text-white font-bold ${
+                    size === value ? "bg-blue-600" : "bg-blue-500 hover:bg-blue-600"
+                  } shadow-md transition-transform transform hover:scale-105`}
+                  onClick={() => setSize(value)}
+                >
+                  {value}
+                </button>
+              ))}
             </div>
+            {sizeError && <p className="text-red-500 mt-2">{sizeError}</p>}
           </div>
-          <div>
-            {/* <Link to={"/cart"}> */}
+          <div className="mb-4">
             <button
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-lg"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
               onClick={handleCart}
             >
               ADD TO CART
             </button>
           </div>
           <div>
-            <h5>ABOUT THE PRODUCT</h5>
-            <p>{items.description}</p>
+            <h5 className="text-lg font-semibold mb-2">ABOUT THE PRODUCT</h5>
+            <p className="text-gray-700">{items.description}</p>
           </div>
         </div>
       </div>

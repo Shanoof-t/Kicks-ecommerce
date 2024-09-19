@@ -1,41 +1,7 @@
 {
-  "users": [
-    {
-      "id": "d635",
-      "firstName": "shanoof",
-      "lastName": "t",
-      "email": "shanoof.001@gmail.com",
-      "password": "123456"
-    }
-  ],
-  "cart": [
-    {
-      "id": "10",
-      "name": "Nike Air Force 1",
-      "imageURL": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/178b2a46-3ee4-492b-882e-f71efdd53a36/air-force-1-big-kids-shoe-2zqp8D.jpg",
-      "price": 90,
-      "quantity": 1,
-      "size": 0
-    }
-  ],
-  "orders": [
-    {
-      "id": "edb4",
-      "email": "salman@gmail.com",
-      "firstName": "salman",
-      "lastName": "faris",
-      "address": "perinthalmanna",
-      "phone": "9961628082",
-      "paymentMethod": "cash",
-      "product": [
-        {
-          "productId": "10",
-          "size": 0,
-          "quantity": 1
-        }
-      ]
-    }
-  ],
+  "users": [],
+  "cart": [],
+  "orders": [],
   "items": [
     {
       "id": "1",
@@ -50,12 +16,7 @@
       "slug": "nike-react-infinity-run-flyknit",
       "featured": 0,
       "description": "A high-performance running shoe designed for long-distance comfort.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "2",
@@ -70,12 +31,7 @@
       "slug": "nike-react-miler",
       "featured": 1,
       "description": "Comfortable and durable, perfect for everyday running.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "3",
@@ -90,12 +46,7 @@
       "slug": "nike-air-zoom-pegasus-37",
       "featured": 0,
       "description": "A versatile shoe providing responsive cushioning and a smooth ride.",
-      "available_sizes": [
-        "6",
-        "7",
-        "8",
-        "9"
-      ]
+      "available_sizes": ["6", "7", "8", "9"]
     },
     {
       "id": "4",
@@ -110,12 +61,7 @@
       "slug": "nike-joyride-run-flyknit",
       "featured": 0,
       "description": "Innovative shoe with Joyride cushioning for a plush, comfortable ride.",
-      "available_sizes": [
-        "6",
-        "7",
-        "8",
-        "9"
-      ]
+      "available_sizes": ["6", "7", "8", "9"]
     },
     {
       "id": "5",
@@ -130,12 +76,7 @@
       "slug": "nike-mercurial-vapor-13-elite-fg",
       "featured": 0,
       "description": "High-performance football boots for quick, agile play on firm ground.",
-      "available_sizes": [
-        "5",
-        "6",
-        "7",
-        "8"
-      ]
+      "available_sizes": ["5", "6", "7", "8"]
     },
     {
       "id": "6",
@@ -150,12 +91,7 @@
       "slug": "nike-phantom-vision-elite-dynamic-fit-fg",
       "featured": 0,
       "description": "Elite-level football boots designed for precision and control.",
-      "available_sizes": [
-        "5",
-        "6",
-        "7",
-        "8"
-      ]
+      "available_sizes": ["5", "6", "7", "8"]
     },
     {
       "id": "7",
@@ -170,12 +106,7 @@
       "slug": "nike-phantom-venom-academy-fg",
       "featured": 0,
       "description": "Affordable football boots with great traction and support.",
-      "available_sizes": [
-        "5",
-        "6",
-        "7",
-        "8"
-      ]
+      "available_sizes": ["5", "6", "7", "8"]
     },
     {
       "id": "8",
@@ -190,12 +121,7 @@
       "slug": "nike-mercurial-vapor-13-elite-tech-craft-fg",
       "featured": 0,
       "description": "Top-tier football boots for elite performance on firm ground.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "9",
@@ -210,12 +136,7 @@
       "slug": "nike-mercurial-superfly-7-pro-mds-fg",
       "featured": 0,
       "description": "Advanced football boots for dynamic and agile play.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "10",
@@ -230,12 +151,7 @@
       "slug": "nike-air-force-1",
       "featured": 0,
       "description": "Classic casual shoes with a timeless design and comfortable fit.",
-      "available_sizes": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "available_sizes": ["3", "4", "5", "6"]
     },
     {
       "id": "11",
@@ -250,12 +166,7 @@
       "slug": "nike-air-max-90",
       "featured": 0,
       "description": "Stylish and comfortable sneakers with iconic Air Max cushioning.",
-      "available_sizes": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "available_sizes": ["3", "4", "5", "6"]
     },
     {
       "id": "12",
@@ -270,12 +181,7 @@
       "slug": "nike-air-max-90-ltr",
       "featured": 0,
       "description": "Durable and comfortable Air Max 90 sneakers with premium materials.",
-      "available_sizes": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "available_sizes": ["3", "4", "5", "6"]
     },
     {
       "id": "13",
@@ -290,12 +196,7 @@
       "slug": "nike-air-max-90-ltr",
       "featured": 0,
       "description": "Durable and comfortable Air Max 90 sneakers with premium materials.",
-      "available_sizes": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "available_sizes": ["3", "4", "5", "6"]
     },
     {
       "id": "14",
@@ -310,12 +211,7 @@
       "slug": "nike-air-max-90-ltr",
       "featured": 0,
       "description": "Durable and comfortable Air Max 90 sneakers with premium materials.",
-      "available_sizes": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "available_sizes": ["3", "4", "5", "6"]
     },
     {
       "id": "15",
@@ -330,12 +226,7 @@
       "slug": "nike-air-max-90-ltr",
       "featured": 0,
       "description": "Durable and comfortable Air Max 90 sneakers with premium materials.",
-      "available_sizes": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "available_sizes": ["3", "4", "5", "6"]
     }
   ]
 }

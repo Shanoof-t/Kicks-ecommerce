@@ -12,7 +12,6 @@ function Login() {
   const [LoginValues, setLoginValues] = useState(initailValues);
   const [loginError, setLoginError] = useState({});
   const [isSubmit, serIsSubmit] = useState(false);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginValues({ ...LoginValues, [name]: value });
@@ -33,9 +32,9 @@ function Login() {
       error.password = "Please enter your password";
     }
     if (Object.keys(error).length === 0) {
-      let users = {}
+      let users = {};
       try {
-         users = await axios.get("http://localhost:4000/users");
+        users = await axios.get("http://localhost:4000/users");
       } catch (error) {
         console.log(error);
       }
@@ -48,15 +47,17 @@ function Login() {
         if (values.password !== obj.password) {
           error.password = "Your password is incorrect";
         }
+        if(values.email === obj.email && values.password === obj.password){
+          localStorage.setItem("firstName", obj.firstName);
+          localStorage.setItem("lastName", obj.lastName);
+          localStorage.setItem("email", obj.email);
+        }
       });
     }
     return error;
   };
   useEffect(() => {
-    console.log(loginError);
-
     if (Object.keys(loginError).length === 0 && isSubmit) {
-      console.log(LoginValues);
       navigateToHome("/");
     }
   }, [loginError]);

@@ -1,16 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function Checkout() {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("");
   const [orderDetails, setOrderDetails] = useState({});
+
   useEffect(() => {
-    axios.get("http://localhost:4000/cart").then((res) => {
-      setCartItems(res.data);
-    });
+    axios
+      .get("http://localhost:4000/cart")
+      .then((res) => {
+        setCartItems(res.data);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   }, []);
 
   useEffect(() => {
@@ -83,6 +91,8 @@ function Checkout() {
         productId: el.id,
         size: el.size,
         quantity: el.quantity,
+        imageURL: el.imageURL,
+        price: el.price,
       };
     });
     setContactDetails((p) => {
@@ -95,6 +105,16 @@ function Checkout() {
         .post("http://localhost:4000/orders", contactDetails)
         .then(() => {
           toast.success("Your Order is Placed");
+        })
+        .then(() => {
+          cartItems.map((item) => {
+            axios.delete(`http://localhost:4000/cart/${item.id}`);
+          });
+        })
+        .then(() => {
+          setTimeout(() => {
+            navigate("/");
+          }, 6000);
         })
         .catch((err) => {
           toast.error(err.message);
