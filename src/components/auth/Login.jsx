@@ -34,7 +34,7 @@ function Login() {
     if (Object.keys(error).length === 0) {
       let users = {};
       try {
-        users = await axios.get("http://localhost:4000/users");
+        users = await axios.get("http://localhost:4000/user");
       } catch (error) {
         console.log(error);
       }

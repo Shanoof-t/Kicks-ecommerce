@@ -23,42 +23,41 @@ import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import OrderDetails from "./pages/OrderDetails";
-
 function App() {
   return (
     <div className="container mx-auto">
       <Navbar />
 
       <div className="main">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="home" element={<Home />} />
-        <Route path="men" element={<MenCategories />}>
-          <Route index element={<MenCasual />} />
-          <Route path="football" element={<MenFootball />} />
-          <Route path="running" element={<MenRunning />} />
-        </Route>
-        <Route path="women" element={<WomenCategories />}>
-          <Route index element={<WomenCasual />} />
-          <Route path="football" element={<WomenFootball />} />
-          <Route path="running" element={<WomenRunning />} />
-        </Route>
-        <Route path="kids" element={<KidsCategories />}>
-          <Route index element={<KidsCasual />} />
-          <Route path="football" element={<KidsFootball />} />
-          <Route path="running" element={<KidsRunning />} />
-        </Route>
-        <Route path="men/:productId" element={<ProductDetails />} />
-        <Route path="women/:productId" element={<ProductDetails />} />
-        <Route path="kids/:productId" element={<ProductDetails />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="checkout" element={<Checkout />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="orderdetails" element={<OrderDetails />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="home" element={<Home />} />
+          <Route path="men" element={<MenCategories />}>
+            <Route index element={<MenCasual />} />
+            <Route path="football" element={<MenFootball />} />
+            <Route path="running" element={<MenRunning />} />
+          </Route>
+          <Route path="women" element={<WomenCategories />}>
+            <Route index element={<WomenCasual />} />
+            <Route path="football" element={<WomenFootball />} />
+            <Route path="running" element={<WomenRunning />} />
+          </Route>
+          <Route path="kids" element={<KidsCategories />}>
+            <Route index element={<KidsCasual />} />
+            <Route path="football" element={<KidsFootball />} />
+            <Route path="running" element={<KidsRunning />} />
+          </Route>
+          <Route path="men/:productId" element={<ProductDetails />} />
+          <Route path="women/:productId" element={<ProductDetails />} />
+          <Route path="kids/:productId" element={<ProductDetails />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="orderdetails" element={<OrderDetails />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
 
       <Footer />

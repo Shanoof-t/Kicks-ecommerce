@@ -1,13 +1,25 @@
 {
   "user": [
     {
-      "id": "0583",
+      "id": "20d8",
+      "firstName": "shanoof",
+      "lastName": "t",
+      "email": "shanoof.001@gmail.com",
+      "password": "123456",
       "cart": [
         {
-          "id": "13",
-          "name": "Nike Air Max 90 LTR",
-          "imageURL": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/c3c11af6-1a5f-44e0-aa98-783656b35bf5/AIR+JORDAN+1+LOW+FLYEASE.png",
-          "price": 110,
+          "id": "16",
+          "name": "Nike Air Force 1 LV8 2",
+          "imageURL": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/294b25e0-fc5d-436b-b09f-d2e30ac760e1/AIR+FORCE+1+LV8+2+%28GS%29.png",
+          "price": 230,
+          "quantity": 1,
+          "size": "3"
+        },
+        {
+          "id": "10",
+          "name": "Nike Air Force 1",
+          "imageURL": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/178b2a46-3ee4-492b-882e-f71efdd53a36/air-force-1-big-kids-shoe-2zqp8D.jpg",
+          "price": 90,
           "quantity": 1,
           "size": "5"
         }

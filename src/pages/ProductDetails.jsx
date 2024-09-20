@@ -13,15 +13,33 @@ function ProductDetails() {
   const [sizes, setSizes] = useState([]);
   const [size, setSize] = useState(0);
   const [sizeError, setSizeError] = useState("");
+  const [user, setUser] = useState("");
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/items?id=${productId}`).then((res) => {
-      if (res.data.length > 0) {
-        setItems(res.data[0]);
-        setSizes(res.data[0].available_sizes);
-      }
-    });
+    axios
+      .get(`http://localhost:4000/items?id=${productId}`)
+      .then((res) => {
+        if (res.data.length > 0) {
+          setItems(res.data[0]);
+          setSizes(res.data[0].available_sizes);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }, [productId]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/user")
+      .then((res) => {
+        const user = res.data[0].id;
+        setUser(user);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
   const handleCart = () => {
     const cartItems = [
@@ -31,13 +49,21 @@ function ProductDetails() {
         imageURL: items.imageURL,
         price: items.price,
         quantity: 1,
-        size: size
+        size: size,
       },
     ];
     size === 0
       ? setSizeError("Choose shoe size")
       : axios
-          .post("http://localhost:4000/user", {cart:cartItems})
+          .get(`http://localhost:4000/user?id=${user}`)
+          .then((res) => {
+            const existingCart = res.data[0].cart || []
+            const updatedCart = [...existingCart,...cartItems]
+            return axios.patch(`http://localhost:4000/user/${user}`, {
+              cart: updatedCart,
+            });
+          })
+
           .then(() => {
             toast.success("Product added to cart");
           })

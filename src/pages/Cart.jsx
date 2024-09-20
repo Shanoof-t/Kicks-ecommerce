@@ -3,19 +3,44 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Cart() {
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-
+  const [user, setUser] = useState("");
   useEffect(() => {
-    axios.get("http://localhost:4000/cart").then((res) => {
-      setCartItems(res.data);
-    });
+    axios
+      .get("http://localhost:4000/user")
+      .then((res) => {
+        const user = res.data[0].id;
+        setUser(user);
+        
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }, []);
+  
+  useEffect(() => {
+    if(user){
+      axios.get(`http://localhost:4000/user/${user}`).then((res) => {
+        if(res.data.length >0 && res.data[0].cart){
+          
+          setCartItems(res.data[0].cart);
+        }else {
+          toast.error("Not found cart items in this user")
+        }
+        
+      })
+      .catch((err)=>{
+        toast.error(err.message)
+      })
+    }
+  }, [user]);
 
   useEffect(() => {
     const total = cartItems.reduce((acc, val) => {
@@ -25,21 +50,30 @@ function Cart() {
   }, [cartItems]);
 
   const handleQuantity = (id, newQuantity) => {
+    const updatedCart = cartItems.map((item) =>
+      item.id === id ? { ...item, quantity: newQuantity } : item
+    );
     axios
-      .patch(`http://localhost:4000/cart/${id}`, { quantity: newQuantity })
+      .patch(`http://localhost:4000/user/${user}`, { cart: updatedCart })
       .then((res) => {
-        const response = res.data;
-        setCartItems((prev) =>
-          prev.map((value) => (value.id === response.id ? response : value))
-        );
+        setCartItems(updatedCart);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+        console.log(err.message);
+        
       });
-  };  
+  };
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:4000/cart/${id}`).then((res) => {
-      setCartItems((prev) => {
-        return prev.filter((value) => value.id !== id);
-      });
-    });
+    const updatedCart = cartItems.filter((item) => item.id !== id);
+    axios
+      .patch(`http://localhost:4000/user/${user}`, { cart: updatedCart })
+      .then(() => {
+        setCartItems(updatedCart);
+      })
+      .catch((err)=>{
+        toast.error(err.message)
+      })
   };
 
   return (

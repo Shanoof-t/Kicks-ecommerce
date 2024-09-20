@@ -10,7 +10,7 @@ function Register() {
     email: "",
     password: "",
     confirmPassword: "",
-    gender:""
+    gender: "",
   };
   const [registerValues, setRegisterValues] = useState(initialValues);
   const [registerErrors, setRegisterErrors] = useState({});
@@ -52,28 +52,26 @@ function Register() {
       error.confirmPassword =
         "The passwords you entered do not match. Please try again.";
     }
-    if(!value.gender){
-      error.gender ="Select your gender"
+    if (!value.gender) {
+      error.gender = "Select your gender";
     }
     return error;
   };
-  const [gender,setGender]=useState('')
-  const hanldeGender = (gen) =>{
-    setGender(gen)
-    setRegisterValues({...registerValues,gender:{gen}})
-  }
+  const [gender, setGender] = useState("");
+  const hanldeGender = (gen) => {
+    setGender(gen);
+    setRegisterValues({ ...registerValues, gender: { gen } });
+  };
   const handleRegistrationNavigation = () => {
     if (Object.keys(registerErrors).length === 0 && isSubmit) {
       axios
-        .post("http://localhost:4000/users", {
+        .post("http://localhost:4000/user", {
           firstName: registerValues.firstName,
           lastName: registerValues.lastName,
           email: registerValues.email,
           password: registerValues.password,
         })
         .then((res) => {
-          console.log(res.data);
-
           navigateToHome("/login");
         })
         .catch((err) => console.log(err.message));
@@ -84,7 +82,7 @@ function Register() {
       handleRegistrationNavigation();
     }
   }, [registerErrors]);
-  
+
   return (
     <div className="flex justify-center">
       <div className="w-2/4 mt-5">
@@ -124,8 +122,8 @@ function Register() {
                 <input
                   type="checkbox"
                   className="form-checkbox h-4 w-4"
-                  checked={gender === 'male'}
-                  onChange={()=>hanldeGender('male')}
+                  checked={gender === "male"}
+                  onChange={() => hanldeGender("male")}
                 />
                 <span className="font-medium">Male</span>
               </label>
@@ -133,8 +131,8 @@ function Register() {
                 <input
                   type="checkbox"
                   className="form-checkbox h-4 w-4"
-                  checked={gender === 'female'}
-                  onChange={()=>hanldeGender('female')}
+                  checked={gender === "female"}
+                  onChange={() => hanldeGender("female")}
                 />
                 <span className="font-medium">Female</span>
               </label>
