@@ -1,6 +1,9 @@
 import { Link, Outlet } from "react-router-dom";
-
+import { useEffect } from "react";
 function MenCategories() {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, []);
   return (
     <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex flex-wrap items-center justify-center mb-8 space-x-4">

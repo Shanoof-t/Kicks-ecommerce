@@ -99,12 +99,17 @@ function Navbar() {
               leaveTo="opacity-0 scale-95"
             >
               <ul className="absolute top-full left-0 bg-white shadow-md mt-2 rounded-lg w-48">
-                <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link to="/men">Men</Link>
-                </li>
-                <li className="px-4 py-2 hover:bg-gray-100">
-                  <Link to="/women">Women</Link>
-                </li>
+                <Link to="/men" onClick={toggleDropdown}>
+                  <li className="px-4 py-2 hover:bg-gray-100 border-gray-900">
+                    Men
+                  </li>
+                </Link>
+                <Link to="/women" onClick={toggleDropdown}>
+                  <li className="px-4 py-2 hover:bg-gray-100">Women</li>
+                </Link>
+                <Link to="/kids" onClick={toggleDropdown}>
+                  <li className="px-4 py-2 hover:bg-gray-100">Kids</li>
+                </Link>
               </ul>
             </Transition>
           </div>

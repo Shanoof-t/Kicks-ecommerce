@@ -5,6 +5,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 function Cart() {
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 

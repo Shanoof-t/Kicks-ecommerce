@@ -1,11 +1,15 @@
+import { useEffect } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 function WomenCategories() {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, []);
   return (
     <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-8">
-      <div className="flex flex-col items-center md:flex-row md:justify-center md:space-x-6 mb-8">
+      <div className="flex flex-wrap items-center justify-center mb-8 space-x-4">
       
-        <ul className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
+        <ul className="flex flex-wrap space-x-4 md:space-x-6">
           <li>
             <Link 
               to="/women" 

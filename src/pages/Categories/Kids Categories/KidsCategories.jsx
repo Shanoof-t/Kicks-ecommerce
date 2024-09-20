@@ -1,6 +1,10 @@
+import { useEffect } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 function KidsCategories() {
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
   return (
     <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex items-center justify-center mb-8">

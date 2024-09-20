@@ -5,6 +5,9 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function ProductDetails() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { productId } = useParams();
   const [items, setItems] = useState({});
   const [sizes, setSizes] = useState([]);
@@ -21,17 +24,20 @@ function ProductDetails() {
   }, [productId]);
 
   const handleCart = () => {
+    const cartItems = [
+      {
+        id: items.id,
+        name: items.name,
+        imageURL: items.imageURL,
+        price: items.price,
+        quantity: 1,
+        size: size
+      },
+    ];
     size === 0
       ? setSizeError("Choose shoe size")
       : axios
-          .post("http://localhost:4000/cart", {
-            id: items.id,
-            name: items.name,
-            imageURL: items.imageURL,
-            price: items.price,
-            quantity: 1,
-            size: size,
-          })
+          .post("http://localhost:4000/user", {cart:cartItems})
           .then(() => {
             toast.success("Product added to cart");
           })
@@ -53,8 +59,12 @@ function ProductDetails() {
             />
           </div>
           <div className="md:w-1/2">
-            <h1 className="text-2xl md:text-3xl font-bold mb-4">{items.name}</h1>
-            <h5 className="text-xl text-blueColor font-bold mb-4">${items.price}.00</h5>
+            <h1 className="text-2xl md:text-3xl font-bold mb-4">
+              {items.name}
+            </h1>
+            <h5 className="text-xl text-blueColor font-bold mb-4">
+              ${items.price}.00
+            </h5>
             <div className="mb-4">
               <h5 className="text-lg font-bold mb-2">Size</h5>
               <div className="flex flex-wrap gap-2 mb-4">
@@ -62,7 +72,9 @@ function ProductDetails() {
                   <button
                     key={index}
                     className={`px-4 py-2 rounded-lg text-white font-bold ${
-                      size === value ? "bg-thirdColor" : "bg-sizeColor  hover:bg-hoverColor"
+                      size === value
+                        ? "bg-thirdColor"
+                        : "bg-sizeColor  hover:bg-hoverColor"
                     } shadow-md transition-transform transform hover:scale-105`}
                     onClick={() => setSize(value)}
                   >

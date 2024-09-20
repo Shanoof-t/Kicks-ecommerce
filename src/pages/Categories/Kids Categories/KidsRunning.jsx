@@ -17,9 +17,9 @@ function KidsRunning() {
       <h1 className="text-3xl font-bold mb-4">Kids Running Products</h1>
       <h5 className="text-lg mb-8">{items.length} items</h5>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {items.map((item) => (
-          <div key={item.id} className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div key={item.id} className="border rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
             <img
               src={item.imageURL}
               alt={`${item.name} image`}

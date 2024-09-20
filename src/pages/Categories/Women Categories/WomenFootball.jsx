@@ -7,7 +7,7 @@ function KidsCasual() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/items?category=FOTTBALL&gender=WOMEN").then((res) => {
+    axios.get("http://localhost:4000/items?category=FOOTBALL&gender=WOMEN").then((res) => {
       setItems(res.data);
     });
   }, []);
@@ -17,9 +17,9 @@ function KidsCasual() {
       <h1 className="text-3xl font-bold mb-4">Women's Football Products</h1>
       <h5 className="text-lg mb-8">{items.length} items</h5>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {items.map((item) => (
-          <div key={item.id} className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div key={item.id} className="border rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
             <img
               src={item.imageURL}
               alt={`${item.name} image`}
@@ -28,7 +28,7 @@ function KidsCasual() {
             <div className="p-4">
               <h2 className="text-xl font-semibold mb-2">{item.name}</h2>
               <Link to={`/kids/${item.id}`}>
-                <button className="w-full px-4 py-2 text-white bg-slate-800 font-bold rounded hover:bg-slate-700 transition-colors duration-300">
+                <button className="w-full px-4 py-2 text-white bg-thirdColor font-bold rounded hover:bg-hoverColor transition-colors duration-300">
                   VIEW PRODUCT - ${item.price}
                 </button>
               </Link>
