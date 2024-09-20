@@ -65,10 +65,10 @@ function Navbar() {
     setIsSubmit(false);
   };
   return (
-    <header className="container bg-white shadow-md py-3 rounded-b-2xl"> 
-    {/* w-full fixed z-10  */}
+    <header className="container bg-white shadow-md py-3 rounded-b-2xl fixed z-10">
+      {/* w-full fixed z-10  */}
       <div className="container mx-auto flex justify-between items-center px-4">
-        <div className="flex items-center space-x-8 ms-6">
+        <div className="flex items-center space-x-8 ">
           <ul className="hidden md:flex space-x-8 text-sm font-semibold">
             <li className="hover:text-secondaryColor">
               <Link to="/men">Men</Link>
@@ -116,7 +116,7 @@ function Navbar() {
           </Link>
         </div>
 
-        <div className="flex items-center space-x-3 me-6">
+        <div className="flex items-center space-x-3 ">
           <div className="relative">
             <button onClick={toggleSearch} className="focus:outline-none">
               <FontAwesomeIcon
@@ -136,7 +136,7 @@ function Navbar() {
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
                   placeholder="Search..."
-                  className={`w-full px-4 py-2 ${
+                  className={`w-full px-4 py-2 bg-thirdColor text-white focus:outline-none ${
                     searchVisible ? "block" : "hidden"
                   }`}
                 />
@@ -144,14 +144,16 @@ function Navbar() {
               {isSubmit ? (
                 <div>
                   {filteredItems.map((value) => (
-                    <Link
-                      to={`/${value.gender}/${value.id}`}
-                      onClick={handleItemClick}
-                    >
-                      <h6 className="text-gray-700 hover:text-secondaryColor">
-                        {value.name}
-                      </h6>
-                    </Link>
+                    <div className=" m-1 p-1 overflow-auto">
+                      <Link
+                        to={`/${value.gender}/${value.id}`}
+                        onClick={handleItemClick}
+                      >
+                        <h6 className="text-gray-700 hover:text-secondaryColor">
+                          {value.name}
+                        </h6>
+                      </Link>
+                    </div>
                   ))}
                 </div>
               ) : (

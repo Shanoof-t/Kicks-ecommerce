@@ -1,5 +1,13 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "5c0e",
+      "firstName": "shanoof",
+      "lastName": "t",
+      "email": "shanoof.001@gmail.com",
+      "password": "123456"
+    }
+  ],
   "cart": [
     {
       "id": "14",
@@ -7,10 +15,49 @@
       "imageURL": "https://imgs.search.brave.com/HxulVbhWF34RkrPtRK8-ig_GGeUNSgP-GHQxPSlboP0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTF1blh1ZVFBa0wu/anBn",
       "price": 110,
       "quantity": 1,
-      "size": "6"
+      "size": "3"
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "id": "7ff8",
+      "email": "shanoof.001@gmail.com",
+      "firstName": "shanoof",
+      "lastName": "t",
+      "address": "perinthalmanna",
+      "phone": "9961628079",
+      "paymentMethod": "cash",
+      "product": [
+        {
+          "name": "Nike Gamma Force",
+          "productId": "14",
+          "size": "5",
+          "quantity": 4,
+          "imageURL": "https://imgs.search.brave.com/HxulVbhWF34RkrPtRK8-ig_GGeUNSgP-GHQxPSlboP0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTF1blh1ZVFBa0wu/anBn",
+          "price": 110
+        }
+      ]
+    },
+    {
+      "id": "0ee3",
+      "email": "shanoof.001@gmail.com",
+      "firstName": "shanoof",
+      "lastName": "t",
+      "address": "perinthalmanna",
+      "phone": "9812322131",
+      "paymentMethod": "cash",
+      "product": [
+        {
+          "name": "Liberty Kids Running Shoes",
+          "productId": "15",
+          "size": "4",
+          "quantity": 1,
+          "imageURL": "https://imgs.search.brave.com/0j1Ebz5b4v8Slnbx_WI-FqGGVJk5lPi6Tc5YXipeYGQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NjFkVHBPamo3Q0wu/anBn",
+          "price": 110
+        }
+      ]
+    }
+  ],
   "items": [
     {
       "id": "1",

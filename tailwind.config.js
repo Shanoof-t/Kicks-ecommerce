@@ -7,7 +7,12 @@ module.exports = {
     extend: {
       colors: {
         'secondaryColor': "#FFA52F",
+        'thirdColor':'#232321',
+        'hoverColor':"#30302D",
+        "blueColor":"#4A69E2",
+        "sizeColor":"#707E6E"
       },
+      
     },
   },
   plugins: [],

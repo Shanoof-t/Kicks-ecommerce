@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <>
-      <footer className="bg-gray-800 text-white pt-8 md:pt-12 md:px-12 px-4 my-12 rounded-3xl ">
+      <footer className="bg-thirdColor text-white pt-8 md:pt-12 md:px-12 px-4 my-12 rounded-3xl ">
         <div className="flex flex-wrap justify-between gap-32">
           <div className="flex-1 min-w-[200px] max-w-[300px]">
             <h2 className="text-xl md:text-2xl font-bold mb-4 text-secondaryColor">

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 function Checkout() {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
@@ -39,6 +40,7 @@ function Checkout() {
   const [contactDetails, setContactDetails] = useState(initialInformation);
   const [contactDetailsErrors, setContactDetailsErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setContactDetails({ ...contactDetails, [name]: value });
@@ -78,6 +80,7 @@ function Checkout() {
     }
     return error;
   };
+
   const handlePaymentMethod = (payment) => {
     setPaymentMethod(payment);
     setContactDetails((prev) => {
@@ -88,6 +91,7 @@ function Checkout() {
   useEffect(() => {
     const products = cartItems.map((el) => {
       return {
+        name:el.name,
         productId: el.id,
         size: el.size,
         quantity: el.quantity,
@@ -99,8 +103,10 @@ function Checkout() {
       return { ...p, product: products };
     });
   }, [cartItems]);
+
   const addOrderTojson = (value) => {
-    if (Object.keys(contactDetailsErrors).length === 0 && isSubmit) {
+
+    if (Object.keys(contactDetailsErrors).length === 0 && isSubmit && localStorage.length > 0) {
       axios
         .post("http://localhost:4000/orders", contactDetails)
         .then(() => {
@@ -119,29 +125,31 @@ function Checkout() {
         .catch((err) => {
           toast.error(err.message);
         });
+    }else if(localStorage.length === 0){
+      navigate('/login')
     }
   };
+
   useEffect(() => {
     if (Object.keys(contactDetailsErrors).length === 0 && isSubmit) {
       addOrderTojson(cartItems);
     }
   }, [isSubmit]);
+
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-6">
+    <div className="min-h-screen py-10 px-6">
       <ToastContainer />
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 ">
-        <form onSubmit={handlePlaceOrder}>
-          <div className="flex-1 bg-gray-300 p-6 rounded-lg shadow-lg ">
-            <div className="mb-8">
-              <h1 className="text-2xl font-bold mb-2">Contact Details</h1>
-              <p className="text-gray-500 mb-4">
-                We will use these details to keep you informed about your
-                delivery.
-              </p>
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10">
+        {/* Left: Contact Form */}
+        <div className="lg:col-span-1 w-full">
+          <form onSubmit={handlePlaceOrder} className="space-y-8">
+            {/* Contact Details Section */}
+            <div className="space-y-4">
+              <h1 className="text-2xl font-bold">Contact Details</h1>
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-3 bg-transparent border border-black rounded-md"
                 name="email"
                 value={contactDetails.email}
                 onChange={handleChange}
@@ -149,39 +157,43 @@ function Checkout() {
               <p className="text-red-600">{contactDetailsErrors.email}</p>
             </div>
 
-            <div className="mb-8">
-              <h1 className="text-2xl font-bold mb-4">Shipping Address</h1>
+            {/* Shipping Address Section */}
+            <div className="space-y-4">
+              <h1 className="text-2xl font-bold">Shipping Address</h1>
               <input
                 type="text"
                 placeholder="First Name*"
-                className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-3 bg-transparent border border-black rounded-md"
                 name="firstName"
                 value={contactDetails.firstName}
                 onChange={handleChange}
               />
               <p className="text-red-600">{contactDetailsErrors.firstName}</p>
+
               <input
                 type="text"
                 placeholder="Last Name*"
-                className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-3 bg-transparent border border-black rounded-md"
                 name="lastName"
                 value={contactDetails.lastName}
                 onChange={handleChange}
               />
               <p className="text-red-600">{contactDetailsErrors.lastName}</p>
+
               <input
                 type="text"
                 placeholder="Delivery Address*"
-                className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-3 bg-transparent border border-black rounded-md"
                 name="address"
                 value={contactDetails.address}
                 onChange={handleChange}
               />
               <p className="text-red-600">{contactDetailsErrors.address}</p>
+
               <input
                 type="number"
                 placeholder="Phone Number"
-                className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-3 bg-transparent border border-black rounded-md"
                 name="phone"
                 value={contactDetails.phone}
                 onChange={handleChange}
@@ -189,51 +201,51 @@ function Checkout() {
               <p className="text-red-600">{contactDetailsErrors.phone}</p>
             </div>
 
-            <div className="flex items-center space-x-4 mb-8">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="mr-2"
-                  checked={paymentMethod === "cash"}
-                  value={contactDetails.paymentMethod}
-                  onChange={() => handlePaymentMethod("cash")}
-                />{" "}
-                Cash
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="mr-2"
-                  checked={paymentMethod === "UPI"}
-                  value={contactDetails.paymentMethod}
-                  onChange={() => handlePaymentMethod("UPI")}
-                />
-                UPI
-              </label>
+            {/* Payment Method Section */}
+            <div className="space-y-4">
+              <h1 className="text-2xl font-bold">Payment Methods</h1>
+              <div className="flex space-x-6">
+                <label className="inline-flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-4 w-4"
+                    checked={paymentMethod === "cash"}
+                    onChange={() => handlePaymentMethod("cash")}
+                  />
+                  <span>Cash</span>
+                </label>
 
-              <p className="text-red-600">
-                {contactDetailsErrors.paymentMethod}
-              </p>
+                <label className="inline-flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox h-4 w-4"
+                    checked={paymentMethod === "UPI"}
+                    onChange={() => handlePaymentMethod("UPI")}
+                  />
+                  <span>UPI</span>
+                </label>
+              </div>
+              <p className="text-red-600">{contactDetailsErrors.paymentMethod}</p>
             </div>
+
+            {/* Submit Button */}
             <button
-              className="w-full mt-6 px-6 py-3 bg-indigo-600 text-white text-lg font-semibold rounded-lg hover:bg-indigo-700 transition duration-300"
-              onClick={handlePlaceOrder}
+              className="w-full mt-6 px-6 py-3 bg-thirdColor text-white text-lg font-semibold rounded-lg hover:bg-hoverColor transition duration-300"
+              type="submit"
             >
               Place Order ${totalPrice}
             </button>
-          </div>
-        </form>
+          </form>
+        </div>
 
-        <div className="flex-1 space-y-6">
-          <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
+        {/* Right: Order Summary */}
+        <div className="lg:col-span-1 w-full space-y-6">
+          {/* Order Summary Section */}
+          <div className="p-6 rounded-lg border border-gray-300">
             <h1 className="text-2xl font-semibold mb-4">Order Summary</h1>
             <div className="flex justify-between text-lg mb-4">
-              <div>
-                <h5>{cartItems.length} ITEM(S)</h5>
-              </div>
-              <div>
-                <h5>${totalPrice}</h5>
-              </div>
+              <span>{cartItems.length} ITEMS</span>
+              <span>${totalPrice}</span>
             </div>
             <hr className="my-4" />
             <div className="flex justify-between text-xl font-semibold">
@@ -242,30 +254,23 @@ function Checkout() {
             </div>
           </div>
 
-          <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
-            <h1 className="text-2xl font-semibold mb-4">Order Details</h1>
-            {cartItems.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center justify-between mb-6 border-b pb-4"
-              >
-                <div className="flex space-x-4">
-                  <img
-                    src={item.imageURL}
-                    alt={item.name}
-                    className="w-16 h-16 rounded-lg object-cover"
-                  />
-                  <div>
-                    <h2 className="text-lg font-semibold">{item.name}</h2>
-                    <div className="text-sm text-gray-500">
-                      <h5>Size: {item.size}</h5>
-                      <h5>Quantity: {item.quantity}</h5>
-                    </div>
-                    <h3 className="text-lg font-bold">${item.price}</h3>
+          {/* Order Details Section */}
+          <div className="p-6 rounded-lg border border-gray-300 space-y-4">
+            <h1 className="text-2xl font-semibold mb-2">Your Order</h1>
+            <div className="space-y-2">
+              {cartItems.map((item) => (
+                <div key={item.id} className="flex justify-between items-center">
+                  <div className="text-lg">{item.name}</div>
+                  <div className="text-lg font-medium">
+                    {item.quantity} x ${item.price}
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div className="mt-6 flex justify-between text-lg font-semibold">
+              <span>Total</span>
+              <span>${totalPrice}</span>
+            </div>
           </div>
         </div>
       </div>

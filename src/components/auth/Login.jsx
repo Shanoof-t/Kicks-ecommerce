@@ -62,9 +62,9 @@ function Login() {
     }
   }, [loginError]);
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-500 to-purple-600">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-4xl font-bold text-center mb-6 text-gray-800">
+    <div className="flex flex-col items-center justify-center h-screen  ">
+      <div className=" p-8 rounded-lg  w-full max-w-md">
+        <h1 className="text-4xl font-bold text-center mb-6">
           Login
         </h1>
         <form onSubmit={handleSubmit}>
@@ -75,7 +75,7 @@ function Login() {
               onChange={handleChange}
               value={LoginValues.email}
               name="email"
-              className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-300"
+              className="w-full px-4 py-3 bg-transparent border border-black rounded-md text-gray-800 focus:outline-none focus:ring-0"
             />
             <p>{loginError.email}</p>
           </div>
@@ -86,23 +86,23 @@ function Login() {
               onChange={handleChange}
               value={LoginValues.password}
               name="password"
-              className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition duration-300"
+              className="w-full px-4 py-3 bg-transparent border border-black rounded-md text-gray-800 focus:outline-none focus:ring-0"
             />
             <p>{loginError.password}</p>
           </div>
           <button
-            className="w-full bg-purple-600 text-white py-3 rounded-md font-semibold hover:bg-purple-700 transition duration-300 mb-4"
+            className="w-full  text-white py-3 rounded-md font-semibold bg-thirdColor hover:bg-hoverColor transition duration-300"
             type="submit"
           >
             Log In
           </button>
         </form>
-        <div className="text-center">
+        <div className="text-center mt-5">
           <p className="text-gray-700 mb-2">
-            Don't have an account?{" "}
+            <span>Don't have an account? </span>
             <button
               onClick={() => navigateToRegister("/register")}
-              className="text-purple-600 hover:underline focus:outline-none"
+              className="text-thirdColor "
             >
               Create your <strong>Kicks</strong> account
             </button>

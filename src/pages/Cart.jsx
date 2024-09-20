@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
@@ -30,7 +30,7 @@ function Cart() {
           prev.map((value) => (value.id === response.id ? response : value))
         );
       });
-  };
+  };  
   const handleDelete = (id) => {
     axios.delete(`http://localhost:4000/cart/${id}`).then((res) => {
       setCartItems((prev) => {
@@ -38,58 +38,57 @@ function Cart() {
       });
     });
   };
+
   return (
-    <div className="container mx-auto p-8">
-      <div className="flex flex-col lg:flex-row gap-8">
+    <div className="container mx-auto p-8 ">
+      {/* Page Heading */}
+      <div className="mb-12 text-center">
+        <h1 className="text-4xl font-bold">Your Bag</h1>
+        <p className="text-gray-600 mt-2">
+          Items in your bag are not reserved. Check out now to make them yours.
+        </p>
+      </div>
+
+      <div className="flex flex-col lg:flex-row gap-12">
+        {/* Cart Items Section */}
         <div className="lg:w-2/3">
-          <div className="mb-8">
-            <h1 className="text-3xl font-semibold">Your Bag</h1>
-            <h6 className="text-gray-500">
-              Items in your bag not reserved - check out now to make them yours.
-            </h6>
-          </div>
           {cartItems.length > 0 ? (
             cartItems.map((value) => {
               return (
                 <div
                   key={value.id}
-                  className="flex items-center justify-between border-b pb-4 mb-4"
+                  className="flex items-center justify-between border-b pb-4 mb-6  p-4 rounded-lg "
                 >
-                  <div className="w-24">
+                  <div className="w-24 me-3">
                     <img
                       src={value.imageURL}
                       alt={value.name}
-                      className="w-full rounded-lg shadow-md"
+                      className="w-full rounded-lg shadow-sm"
                     />
                   </div>
 
                   <div className="flex flex-col gap-2 w-1/2">
                     <h1 className="text-lg font-medium">{value.name}</h1>
-
+                    <h2 className="text-gray-500">Size : {value.size}</h2>
                     <div className="flex items-center gap-2">
                       <button
-                        className="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded"
-                        onClick={() =>
-                          handleQuantity(value.id, value.quantity + 1)
-                        }
-                      >
-                        +
-                      </button>
-                      <input
-                        type="number"
-                        value={value.quantity}
-                        className="w-12 text-center border rounded"
-                        readOnly
-                      />
-                      <button
-                        className="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded"
+                        className="bg-thirdColor hover:bg-hoverColor px-3 py-1 rounded"
                         onClick={() => {
                           if (value.quantity > 1) {
                             handleQuantity(value.id, value.quantity - 1);
                           }
                         }}
                       >
-                        -
+                        <span className="text-white">-</span>
+                      </button>
+                      <h1 className="font-bold mx-2">{value.quantity}</h1>
+                      <button
+                        className="bg-thirdColor hover:bg-hoverColor px-3 py-1 rounded"
+                        onClick={() => {
+                          handleQuantity(value.id, value.quantity + 1);
+                        }}
+                      >
+                        <span className="text-white">+</span>
                       </button>
                     </div>
                   </div>
@@ -107,29 +106,33 @@ function Cart() {
               );
             })
           ) : (
-            <h1>Cart is Empty</h1>
+            <h1 className="text-center text-gray-500">Cart is Empty</h1>
           )}
         </div>
 
         {/* Order Summary */}
-        <div className="lg:w-1/3 bg-gray-100 p-6 rounded-lg shadow-lg">
-          <h1 className="text-2xl font-semibold mb-4">Order Summary</h1>
+        <div className="lg:w-1/3  p-6 rounded-lg ">
+          <h1 className="text-2xl font-bold mb-6">Order Summary</h1>
           <div className="flex justify-between text-lg mb-4">
-            <div>
-              <h5>{cartItems.length} ITEM</h5>
-            </div>
-            <div>
-              <h5>${totalPrice}</h5>
-            </div>
+            <h5>
+              {cartItems.length} ITEM{cartItems.length > 1 ? "S" : ""}
+            </h5>
+            <h5>${totalPrice}</h5>
           </div>
+
           <hr className="my-4" />
+
           <div className="flex justify-between text-xl font-semibold">
             <h2>Total</h2>
             <h2>${totalPrice}</h2>
           </div>
+
           <Link to={totalPrice > 0 ? "/checkout" : ""}>
-            <button className="w-full mt-6 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
-              Proceed to Checkout
+            <button
+              className="w-full mt-6 bg-thirdColor text-white py-3 rounded-lg hover:bg-hoverColor transition"
+              disabled={totalPrice === 0}
+            >
+              Checkout
             </button>
           </Link>
         </div>

@@ -33,7 +33,7 @@ function ProductDetails() {
             size: size,
           })
           .then(() => {
-            toast.success("Product added");
+            toast.success("Product added to cart");
           })
           .catch((err) => {
             toast.error(err.message);
@@ -43,41 +43,47 @@ function ProductDetails() {
   return (
     <>
       <ToastContainer />
-      <div className="container mx-auto p-6 md:flex md:space-x-6">
-        <div className="md:w-1/2">
-          <img src={items.imageURL} alt={items.name} className="w-full h-auto object-cover rounded-lg shadow-lg" />
-        </div>
-        <div className="md:w-1/2 mt-6 md:mt-0">
-          <h1 className="text-3xl font-bold mb-4">{items.name}</h1>
-          <h5 className="text-xl text-gray-800 mb-4">${items.price}</h5>
-          <div className="mb-4">
-            <h5 className="text-lg font-semibold mb-2">Size</h5>
-            <div className="flex flex-wrap gap-2">
-              {sizes.map((value, index) => (
-                <button
-                  key={index}
-                  className={`px-4 py-2 rounded-lg text-white font-bold ${
-                    size === value ? "bg-blue-600" : "bg-blue-500 hover:bg-blue-600"
-                  } shadow-md transition-transform transform hover:scale-105`}
-                  onClick={() => setSize(value)}
-                >
-                  {value}
-                </button>
-              ))}
+      <div className="container mx-auto flex p-4 sm:p-6 lg:p-8">
+        <div className="md:flex justify-evenly md:space-x-6">
+          <div className="md:w-2/4  mb-6 md:mb-0">
+            <img
+              src={items.imageURL}
+              alt={items.name}
+              className="w-full h-4/5 object-cover rounded-lg shadow-lg"
+            />
+          </div>
+          <div className="md:w-1/2">
+            <h1 className="text-2xl md:text-3xl font-bold mb-4">{items.name}</h1>
+            <h5 className="text-xl text-blueColor font-bold mb-4">${items.price}.00</h5>
+            <div className="mb-4">
+              <h5 className="text-lg font-bold mb-2">Size</h5>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {sizes.map((value, index) => (
+                  <button
+                    key={index}
+                    className={`px-4 py-2 rounded-lg text-white font-bold ${
+                      size === value ? "bg-thirdColor" : "bg-sizeColor  hover:bg-hoverColor"
+                    } shadow-md transition-transform transform hover:scale-105`}
+                    onClick={() => setSize(value)}
+                  >
+                    {value}
+                  </button>
+                ))}
+              </div>
+              {sizeError && <p className="text-red-500 mt-2">{sizeError}</p>}
             </div>
-            {sizeError && <p className="text-red-500 mt-2">{sizeError}</p>}
-          </div>
-          <div className="mb-4">
-            <button
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
-              onClick={handleCart}
-            >
-              ADD TO CART
-            </button>
-          </div>
-          <div>
-            <h5 className="text-lg font-semibold mb-2">ABOUT THE PRODUCT</h5>
-            <p className="text-gray-700">{items.description}</p>
+            <div className="mb-4">
+              <button
+                className="bg-thirdColor hover:bg-hoverColor text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+                onClick={handleCart}
+              >
+                ADD TO CART
+              </button>
+            </div>
+            <div>
+              <h5 className="text-lg font-bold mb-2">ABOUT THE PRODUCT</h5>
+              <p className="text-gray-700">{items.description}</p>
+            </div>
           </div>
         </div>
       </div>
