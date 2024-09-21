@@ -12,18 +12,7 @@ function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [user, setUser] = useState("");
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:4000/user")
-  //     .then((res) => {
-  //       const user = res.data[0].id;
-  //       setUser(user);
-
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // }, []);
+  
   useEffect(() => {
     setUser(localStorage.getItem("userId"));
   }, []);

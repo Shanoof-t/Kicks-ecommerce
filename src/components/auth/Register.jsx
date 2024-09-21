@@ -70,6 +70,8 @@ function Register() {
           lastName: registerValues.lastName,
           email: registerValues.email,
           password: registerValues.password,
+          cart:[],
+          order:[]
         })
         .then((res) => {
           navigateToHome("/login");

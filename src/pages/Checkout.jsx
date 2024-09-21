@@ -6,21 +6,28 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Checkout() {
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);  
   const [totalPrice, setTotalPrice] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("");
   const [orderDetails, setOrderDetails] = useState({});
-
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    setUser(userId);
+  },[]);
   useEffect(() => {
     axios
-      .get("http://localhost:4000/cart")
+      .get(`http://localhost:4000/user/${user}`)
       .then((res) => {
-        setCartItems(res.data);
+        const existingCart = res.data.cart || []
+        setCartItems(existingCart);
+        console.log(cartItems);
+        
       })
       .catch((err) => {
         toast.error(err.message);
       });
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const total = cartItems.reduce((acc, val) => {
@@ -91,7 +98,7 @@ function Checkout() {
   useEffect(() => {
     const products = cartItems.map((el) => {
       return {
-        name:el.name,
+        name: el.name,
         productId: el.id,
         size: el.size,
         quantity: el.quantity,
@@ -105,18 +112,24 @@ function Checkout() {
   }, [cartItems]);
 
   const addOrderTojson = (value) => {
-
-    if (Object.keys(contactDetailsErrors).length === 0 && isSubmit && localStorage.length > 0) {
+    if (
+      Object.keys(contactDetailsErrors).length === 0 &&
+      isSubmit && user
+    ) {
       axios
-        .post("http://localhost:4000/orders", contactDetails)
+        .get(`http://localhost:4000/user/${user}`)
+        .then((res) => {
+          const existingOrders = res.data.order || [];
+          const updatedOrder = [...existingOrders, contactDetails];
+          axios.patch(`http://localhost:4000/user/${user}`, {
+            order: updatedOrder,
+            cart:[]
+          });
+        })
         .then(() => {
           toast.success("Your Order is Placed");
         })
-        .then(() => {
-          cartItems.map((item) => {
-            axios.delete(`http://localhost:4000/cart/${item.id}`);
-          });
-        })
+
         .then(() => {
           setTimeout(() => {
             navigate("/");
@@ -125,8 +138,8 @@ function Checkout() {
         .catch((err) => {
           toast.error(err.message);
         });
-    }else if(localStorage.length === 0){
-      navigate('/login')
+    }else if(!user){
+      navigate("/login")
     }
   };
 
@@ -157,7 +170,6 @@ function Checkout() {
               <p className="text-red-600">{contactDetailsErrors.email}</p>
             </div>
 
-            {/* Shipping Address Section */}
             <div className="space-y-4">
               <h1 className="text-2xl font-bold">Shipping Address</h1>
               <input
@@ -201,7 +213,6 @@ function Checkout() {
               <p className="text-red-600">{contactDetailsErrors.phone}</p>
             </div>
 
-            {/* Payment Method Section */}
             <div className="space-y-4">
               <h1 className="text-2xl font-bold">Payment Methods</h1>
               <div className="flex space-x-6">
@@ -225,7 +236,9 @@ function Checkout() {
                   <span>UPI</span>
                 </label>
               </div>
-              <p className="text-red-600">{contactDetailsErrors.paymentMethod}</p>
+              <p className="text-red-600">
+                {contactDetailsErrors.paymentMethod}
+              </p>
             </div>
 
             {/* Submit Button */}
@@ -259,7 +272,10 @@ function Checkout() {
             <h1 className="text-2xl font-semibold mb-2">Your Order</h1>
             <div className="space-y-2">
               {cartItems.map((item) => (
-                <div key={item.id} className="flex justify-between items-center">
+                <div
+                  key={item.id}
+                  className="flex justify-between items-center"
+                >
                   <div className="text-lg">{item.name}</div>
                   <div className="text-lg font-medium">
                     {item.quantity} x ${item.price}
