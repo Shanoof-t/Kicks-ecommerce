@@ -2,14 +2,16 @@ import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 function OrderDetails() {
   const [orderdetails, setOrderDetails] = useState([]);
-  
-  
+
+  const userId = localStorage.getItem("userId");
+
   useEffect(() => {
-    axios.get("http://localhost:4000/orders").then((res) => {
-      setOrderDetails(res.data);
+    axios.get(`http://localhost:4000/user/${userId}`).then((res) => {
+      
+      setOrderDetails(res.data.order);
     });
-    
   }, []);
+console.log(orderdetails);
 
   // const handleCancel = useCallback((orderId, productId) => {
   //   const updatedOrders = orderdetails.map((order) => {
@@ -26,7 +28,7 @@ function OrderDetails() {
   //   axios.patch(`http://localhost:4000/orders/${orderId}`,{product:updatedOrder.product})
   //   .then((res)=>{
   //     console.log(res);
-      
+
   //     // setOrderDetails(updatedOrder)
   //   })
   //   .catch((err)=>{
@@ -46,10 +48,10 @@ function OrderDetails() {
       ) : (
         orderdetails.map((order) => {
           return (
-            <div key={order.id} className=" rounded-lg mb-8 p-6">
+            <div key={order.orderId} className=" rounded-lg mb-8 p-6">
               <div>
                 <h1 className="text-3xl font-bold text-thirdColor">
-                  Order ID: {order.id}
+                  Order ID: {order.orderId}
                 </h1>
               </div>
               <hr className="my-4 border-black" />

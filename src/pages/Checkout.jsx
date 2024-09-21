@@ -3,13 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import {v4 as uuidv4} from 'uuid'
 function Checkout() {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);  
   const [totalPrice, setTotalPrice] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("");
-  const [orderDetails, setOrderDetails] = useState({});
   const [user, setUser] = useState("");
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -37,6 +36,7 @@ function Checkout() {
   }, [cartItems]);
 
   const initialInformation = {
+    orderId:uuidv4(),
     email: "",
     firstName: "",
     lastName: "",
@@ -131,9 +131,9 @@ function Checkout() {
         })
 
         .then(() => {
-          setTimeout(() => {
+          // setTimeout(() => {
             navigate("/");
-          }, 6000);
+          // }, 6000);
         })
         .catch((err) => {
           toast.error(err.message);
