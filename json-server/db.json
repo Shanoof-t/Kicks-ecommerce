@@ -1,73 +1,5 @@
 {
-  "user": [
-    {
-      "id": "81e5",
-      "firstName": "shanoof",
-      "lastName": "t",
-      "email": "shanoof.001@gmail.com",
-      "password": "123456",
-      "cart": [],
-      "order": [
-        {
-          "orderId": "4be98a5a-5502-47c0-8359-a6a3f733bac0",
-          "email": "shanoof.001@gmail.com",
-          "firstName": "shanoof",
-          "lastName": "t",
-          "address": "perinthalmanna",
-          "phone": "9961628081",
-          "paymentMethod": "cash",
-          "product": [
-            {
-              "name": "Nike Air Max 90 LTR",
-              "productId": "13",
-              "size": "4",
-              "quantity": 1,
-              "imageURL": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/c3c11af6-1a5f-44e0-aa98-783656b35bf5/AIR+JORDAN+1+LOW+FLYEASE.png",
-              "price": 110
-            }
-          ]
-        },
-        {
-          "orderId": "3e51753d-3381-41fe-bbd2-21982c4f0805",
-          "email": "shanoof.001@gmail.com",
-          "firstName": "shanoof",
-          "lastName": "t",
-          "address": "kozhikode",
-          "phone": "9961628083",
-          "paymentMethod": "cash",
-          "product": [
-            {
-              "name": "Nike Gamma Force",
-              "productId": "14",
-              "size": "3",
-              "quantity": 1,
-              "imageURL": "https://imgs.search.brave.com/HxulVbhWF34RkrPtRK8-ig_GGeUNSgP-GHQxPSlboP0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTF1blh1ZVFBa0wu/anBn",
-              "price": 110
-            }
-          ]
-        },
-        {
-          "orderId": "2d554324-8dbc-4645-8f7d-3ca6ba76977d",
-          "email": "sreeshanthnp7@gmail.com",
-          "firstName": "sreeshanth",
-          "lastName": "faris",
-          "address": "kozhikode",
-          "phone": "9961628083",
-          "paymentMethod": "UPI",
-          "product": [
-            {
-              "name": "Nike Air Max 90",
-              "productId": "11",
-              "size": "4",
-              "quantity": 1,
-              "imageURL": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/8439f823-86cf-4086-81d2-4f9ff9a66866/air-max-90-big-kids-shoe-1wzwJM.jpg",
-              "price": 100
-            }
-          ]
-        }
-      ]
-    }
-  ],
+  "user": [],
   "items": [
     {
       "id": "1",
@@ -82,12 +14,7 @@
       "slug": "nike-react-infinity-run-flyknit",
       "featured": 0,
       "description": "A high-performance running shoe designed for long-distance comfort.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "2",
@@ -102,12 +29,7 @@
       "slug": "nike-react-miler",
       "featured": 1,
       "description": "Comfortable and durable, perfect for everyday running.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "3",
@@ -122,12 +44,7 @@
       "slug": "nike-air-zoom-pegasus-37",
       "featured": 0,
       "description": "A versatile shoe providing responsive cushioning and a smooth ride.",
-      "available_sizes": [
-        "6",
-        "7",
-        "8",
-        "9"
-      ]
+      "available_sizes": ["6", "7", "8", "9"]
     },
     {
       "id": "4",
@@ -142,12 +59,7 @@
       "slug": "nike-joyride-run-flyknit",
       "featured": 0,
       "description": "Innovative shoe with Joyride cushioning for a plush, comfortable ride.",
-      "available_sizes": [
-        "6",
-        "7",
-        "8",
-        "9"
-      ]
+      "available_sizes": ["6", "7", "8", "9"]
     },
     {
       "id": "5",
@@ -162,12 +74,7 @@
       "slug": "nike-mercurial-vapor-13-elite-fg",
       "featured": 0,
       "description": "High-performance football boots for quick, agile play on firm ground.",
-      "available_sizes": [
-        "5",
-        "6",
-        "7",
-        "8"
-      ]
+      "available_sizes": ["5", "6", "7", "8"]
     },
     {
       "id": "6",
@@ -182,12 +89,7 @@
       "slug": "nike-phantom-vision-elite-dynamic-fit-fg",
       "featured": 0,
       "description": "Elite-level football boots designed for precision and control.",
-      "available_sizes": [
-        "5",
-        "6",
-        "7",
-        "8"
-      ]
+      "available_sizes": ["5", "6", "7", "8"]
     },
     {
       "id": "7",
@@ -202,12 +104,7 @@
       "slug": "nike-phantom-venom-academy-fg",
       "featured": 0,
       "description": "Affordable football boots with great traction and support.",
-      "available_sizes": [
-        "5",
-        "6",
-        "7",
-        "8"
-      ]
+      "available_sizes": ["5", "6", "7", "8"]
     },
     {
       "id": "8",
@@ -222,12 +119,7 @@
       "slug": "nike-mercurial-vapor-13-elite-tech-craft-fg",
       "featured": 0,
       "description": "Top-tier football boots for elite performance on firm ground.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "9",
@@ -242,12 +134,7 @@
       "slug": "nike-mercurial-superfly-7-pro-mds-fg",
       "featured": 0,
       "description": "Advanced football boots for dynamic and agile play.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "10",
@@ -262,12 +149,7 @@
       "slug": "nike-air-force-1",
       "featured": 0,
       "description": "Classic casual shoes with a timeless design and comfortable fit.",
-      "available_sizes": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "available_sizes": ["3", "4", "5", "6"]
     },
     {
       "id": "11",
@@ -282,12 +164,7 @@
       "slug": "nike-air-max-90",
       "featured": 0,
       "description": "Stylish and comfortable sneakers with iconic Air Max cushioning.",
-      "available_sizes": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "available_sizes": ["3", "4", "5", "6"]
     },
     {
       "id": "12",
@@ -302,12 +179,7 @@
       "slug": "nike-air-max-90-ltr",
       "featured": 0,
       "description": "Durable and comfortable Air Max 90 sneakers with premium materials.",
-      "available_sizes": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "available_sizes": ["3", "4", "5", "6"]
     },
     {
       "id": "13",
@@ -322,12 +194,7 @@
       "slug": "nike-air-max-90-ltr",
       "featured": 0,
       "description": "Durable and comfortable Air Max 90 sneakers with premium materials.",
-      "available_sizes": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "available_sizes": ["3", "4", "5", "6"]
     },
     {
       "id": "14",
@@ -342,12 +209,7 @@
       "slug": "nike-air-max-90-ltr",
       "featured": 0,
       "description": "Durable and comfortable Air Max 90 sneakers with premium materials.",
-      "available_sizes": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "available_sizes": ["3", "4", "5", "6"]
     },
     {
       "id": "15",
@@ -362,12 +224,7 @@
       "slug": "nike-air-max-90-ltr",
       "featured": 0,
       "description": "Durable and comfortable Air Max 90 sneakers with premium materials.",
-      "available_sizes": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "available_sizes": ["3", "4", "5", "6"]
     },
     {
       "id": "16",
@@ -382,12 +239,7 @@
       "slug": "nike-air-force-1-lv8-2",
       "featured": 0,
       "description": "Durable and comfortable Air Force 1 sneakers with premium materials.",
-      "available_sizes": [
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "available_sizes": ["3", "4", "5", "6"]
     },
     {
       "id": "17",
@@ -402,12 +254,7 @@
       "slug": "puma",
       "featured": 0,
       "description": "Comfortable and stylish running shoes with superior cushioning.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "18",
@@ -422,12 +269,7 @@
       "slug": "Air-Jordan-1-Low",
       "featured": 0,
       "description": "Comfortable and stylish casual shoes with superior cushioning.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "19",
@@ -442,13 +284,7 @@
       "slug": "Air-Jordan-1-Mid",
       "featured": 0,
       "description": "Comfortable and stylish casual shoes with superior cushioning.",
-      "available_sizes": [
-        "7",
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["7", "8", "9", "10", "11"]
     },
     {
       "id": "20",
@@ -463,13 +299,7 @@
       "slug": "Air-Jordan-4-Rm",
       "featured": 0,
       "description": "Comfortable and stylish casual shoes with superior cushioning.",
-      "available_sizes": [
-        "7",
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["7", "8", "9", "10", "11"]
     },
     {
       "id": "21",
@@ -484,13 +314,7 @@
       "slug": "Air-Jordan-4-Rm",
       "featured": 0,
       "description": "Comfortable and stylish casual shoes with superior cushioning.",
-      "available_sizes": [
-        "7",
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["7", "8", "9", "10", "11"]
     },
     {
       "id": "21",
@@ -505,12 +329,7 @@
       "slug": "nike-mercurial-superfly-7-pro-mds-fg",
       "featured": 0,
       "description": "Advanced football boots for dynamic and agile play.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "22",
@@ -525,12 +344,7 @@
       "slug": "TF High-Top Football Shoes",
       "featured": 0,
       "description": "Advanced football boots for dynamic and agile play.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "23",
@@ -545,12 +359,7 @@
       "slug": "TF High-Top Football Shoes",
       "featured": 0,
       "description": "Advanced football boots for dynamic and agile play.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "24",
@@ -565,12 +374,7 @@
       "slug": "nike-mercurial-superfly-7-pro-mds-fg",
       "featured": 0,
       "description": "Advanced football boots for dynamic and agile play.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "25",
@@ -585,12 +389,7 @@
       "slug": "nike-mercurial-superfly-7-pro-mds-fg",
       "featured": 0,
       "description": "Advanced football boots for dynamic and agile play.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     },
     {
       "id": "26",
@@ -605,12 +404,7 @@
       "slug": "TF High-Top Football Shoes",
       "featured": 0,
       "description": "Advanced football boots for dynamic and agile play.",
-      "available_sizes": [
-        "8",
-        "9",
-        "10",
-        "11"
-      ]
+      "available_sizes": ["8", "9", "10", "11"]
     }
   ]
 }

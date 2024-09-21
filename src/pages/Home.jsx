@@ -13,6 +13,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 function Home() {
   const navigate = useNavigate();
+  
   const settings = {
     dots: true,
     infinite: true,

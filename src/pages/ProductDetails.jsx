@@ -13,14 +13,11 @@ function ProductDetails() {
   const [size, setSize] = useState(0);
   const [sizeError, setSizeError] = useState("");
   const [user, setUser] = useState("");
-  const navigate = useNavigate()
-  useEffect(()=>{
-    const userId = localStorage.getItem('userId')
-    if(!userId){
-      navigate('/login')
-    }
-    setUser(userId)
-  },[])
+  const navigate = useNavigate();
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    setUser(userId);
+  }, []);
   useEffect(() => {
     axios
       .get(`http://localhost:4000/items?id=${productId}`)
@@ -48,6 +45,9 @@ function ProductDetails() {
   // }, []);
 
   const handleCart = () => {
+    if (!user) {
+      navigate("/login");
+    }
     const cartItems = [
       {
         id: items.id,
@@ -63,18 +63,21 @@ function ProductDetails() {
       : axios
           .get(`http://localhost:4000/user/${user}`)
           .then((res) => {
-            const existingCart = res.data.cart || []
-            const updatedCart = [...existingCart,...cartItems]
+            const existingCart = res.data.cart || [];
+            const updatedCart = [...existingCart, ...cartItems];
             axios.patch(`http://localhost:4000/user/${user}`, {
               cart: updatedCart,
-            });  
+            });
           })
           .then(() => {
-            toast.success("Product added to cart");
+            toast.success("Product added to cart",{className:"mt-12"});
           })
           .catch((err) => {
-            toast.error(err.message);
+            toast.error(err.message,{className:"mt-12"});
           });
+          if(size >0){
+            setSizeError('')
+          }
   };
 
   return (

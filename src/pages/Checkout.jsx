@@ -127,16 +127,16 @@ function Checkout() {
           });
         })
         .then(() => {
-          toast.success("Your Order is Placed");
+          toast.success("Your Order is Placed",{className:"mt-12"});
         })
 
         .then(() => {
-          // setTimeout(() => {
+          setTimeout(() => {
             navigate("/");
-          // }, 6000);
+          }, 3000);
         })
         .catch((err) => {
-          toast.error(err.message);
+          toast.error(err.message,{className:"mt-12"});
         });
     }else if(!user){
       navigate("/login")
