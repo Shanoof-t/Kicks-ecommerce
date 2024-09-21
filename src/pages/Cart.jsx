@@ -22,7 +22,6 @@ function Cart() {
       axios
         .get(`http://localhost:4000/user/${user}`)
         .then((res) => {
-          console.log(res.data.cart);
           setCartItems(res.data.cart)
         })
         .catch((err) => {

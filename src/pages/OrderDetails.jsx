@@ -1,40 +1,13 @@
 import axios from "axios";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 function OrderDetails() {
   const [orderdetails, setOrderDetails] = useState([]);
-
   const userId = localStorage.getItem("userId");
-
   useEffect(() => {
     axios.get(`http://localhost:4000/user/${userId}`).then((res) => {
-      
       setOrderDetails(res.data.order);
     });
-  }, []);
-console.log(orderdetails);
-
-  // const handleCancel = useCallback((orderId, productId) => {
-  //   const updatedOrders = orderdetails.map((order) => {
-  //     if (order.id === orderId) {
-  //       const updatedProduct = order.product.filter(
-  //         (product) => product.productId !== productId
-  //       );
-  //       return { ...order, product: updatedProduct };
-  //     }
-  //     return order
-  //   });
-  //   const updatedOrder = updatedOrders.find((order)=>orderId === order.id)
-
-  //   axios.patch(`http://localhost:4000/orders/${orderId}`,{product:updatedOrder.product})
-  //   .then((res)=>{
-  //     console.log(res);
-
-  //     // setOrderDetails(updatedOrder)
-  //   })
-  //   .catch((err)=>{
-  //     console.log(err.message)
-  //   })
-  // }, [orderdetails]);
+  }, [userId]);
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 text-center">

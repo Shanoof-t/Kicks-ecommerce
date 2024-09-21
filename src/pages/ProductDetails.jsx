@@ -32,17 +32,6 @@ function ProductDetails() {
       });
   }, [productId]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:4000/user")
-  //     .then((res) => {
-  //       const user = res.data;
-  //       setUser(user);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // }, []);
 
   const handleCart = () => {
     if (!user) {

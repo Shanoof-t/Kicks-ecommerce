@@ -36,16 +36,16 @@ function Login() {
         const response = await axios.get("http://localhost:4000/user");
         const users = response.data;
         console.log(users);
-        
+
         const matchedUser = users.find((obj) => values.email === obj.email);
         console.log(matchedUser);
-        
+
         if (!matchedUser) {
           error.email = "Your email is incorrect";
         } else if (values.password !== matchedUser.password) {
           error.password = "Your password is incorrect";
         } else {
-          localStorage.setItem("userId",matchedUser.id)
+          localStorage.setItem("userId", matchedUser.id);
           localStorage.setItem("firstName", matchedUser.firstName);
           localStorage.setItem("lastName", matchedUser.lastName);
           localStorage.setItem("email", matchedUser.email);

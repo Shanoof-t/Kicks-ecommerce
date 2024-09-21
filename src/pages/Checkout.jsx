@@ -133,7 +133,7 @@ function Checkout() {
         .then(() => {
           setTimeout(() => {
             navigate("/");
-          }, 3000);
+          }, 6000);
         })
         .catch((err) => {
           toast.error(err.message,{className:"mt-12"});
