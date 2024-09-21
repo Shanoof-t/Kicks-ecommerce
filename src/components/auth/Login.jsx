@@ -32,27 +32,27 @@ function Login() {
       error.password = "Please enter your password";
     }
     if (Object.keys(error).length === 0) {
-      let users = {};
       try {
-        users = await axios.get("http://localhost:4000/user");
+        const response = await axios.get("http://localhost:4000/user");
+        const users = response.data;
+        console.log(users);
+        
+        const matchedUser = users.find((obj) => values.email === obj.email);
+        console.log(matchedUser);
+        
+        if (!matchedUser) {
+          error.email = "Your email is incorrect";
+        } else if (values.password !== matchedUser.password) {
+          error.password = "Your password is incorrect";
+        } else {
+          localStorage.setItem("userId",matchedUser.id)
+          localStorage.setItem("firstName", matchedUser.firstName);
+          localStorage.setItem("lastName", matchedUser.lastName);
+          localStorage.setItem("email", matchedUser.email);
+        }
       } catch (error) {
         console.log(error);
       }
-      const user = users.data;
-      user.forEach((obj) => {
-        if (values.email !== obj.email) {
-          error.email = "Your email is incorrect";
-        }
-
-        if (values.password !== obj.password) {
-          error.password = "Your password is incorrect";
-        }
-        if(values.email === obj.email && values.password === obj.password){
-          localStorage.setItem("firstName", obj.firstName);
-          localStorage.setItem("lastName", obj.lastName);
-          localStorage.setItem("email", obj.email);
-        }
-      });
     }
     return error;
   };
@@ -64,9 +64,7 @@ function Login() {
   return (
     <div className="flex flex-col items-center justify-center h-screen  ">
       <div className=" p-8 rounded-lg  w-full max-w-md">
-        <h1 className="text-4xl font-bold text-center mb-6">
-          Login
-        </h1>
+        <h1 className="text-4xl font-bold text-center mb-6">Login</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input

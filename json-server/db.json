@@ -1,7 +1,7 @@
 {
   "user": [
     {
-      "id": "20d8",
+      "id": "b668",
       "firstName": "shanoof",
       "lastName": "t",
       "email": "shanoof.001@gmail.com",
@@ -13,7 +13,7 @@
           "imageURL": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/294b25e0-fc5d-436b-b09f-d2e30ac760e1/AIR+FORCE+1+LV8+2+%28GS%29.png",
           "price": 230,
           "quantity": 1,
-          "size": "3"
+          "size": "4"
         },
         {
           "id": "10",
@@ -22,6 +22,39 @@
           "price": 90,
           "quantity": 1,
           "size": "5"
+        }
+      ]
+    },
+    {
+      "id": "6b32",
+      "firstName": "salman",
+      "lastName": "t",
+      "email": "salman@gmail.com",
+      "password": "123456",
+      "cart": [
+        {
+          "id": "16",
+          "name": "Nike Air Force 1 LV8 2",
+          "imageURL": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/294b25e0-fc5d-436b-b09f-d2e30ac760e1/AIR+FORCE+1+LV8+2+%28GS%29.png",
+          "price": 230,
+          "quantity": 1,
+          "size": "5"
+        },
+        {
+          "id": "14",
+          "name": "Nike Gamma Force",
+          "imageURL": "https://imgs.search.brave.com/HxulVbhWF34RkrPtRK8-ig_GGeUNSgP-GHQxPSlboP0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTF1blh1ZVFBa0wu/anBn",
+          "price": 110,
+          "quantity": 1,
+          "size": "4"
+        },
+        {
+          "id": "5",
+          "name": "Nike Mercurial Vapor 13 Elite FG",
+          "imageURL": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/9dda6202-e2ff-4711-9a09-0fcb7d90c164/mercurial-vapor-13-elite-fg-firm-ground-soccer-cleat-14MsF2.jpg",
+          "price": 250,
+          "quantity": 1,
+          "size": "6"
         }
       ]
     }

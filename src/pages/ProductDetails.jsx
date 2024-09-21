@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 function ProductDetails() {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -14,7 +13,14 @@ function ProductDetails() {
   const [size, setSize] = useState(0);
   const [sizeError, setSizeError] = useState("");
   const [user, setUser] = useState("");
-
+  const navigate = useNavigate()
+  useEffect(()=>{
+    const userId = localStorage.getItem('userId')
+    if(!userId){
+      navigate('/login')
+    }
+    setUser(userId)
+  },[])
   useEffect(() => {
     axios
       .get(`http://localhost:4000/items?id=${productId}`)
@@ -29,17 +35,17 @@ function ProductDetails() {
       });
   }, [productId]);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:4000/user")
-      .then((res) => {
-        const user = res.data[0].id;
-        setUser(user);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:4000/user")
+  //     .then((res) => {
+  //       const user = res.data;
+  //       setUser(user);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
+  // }, []);
 
   const handleCart = () => {
     const cartItems = [
@@ -55,15 +61,14 @@ function ProductDetails() {
     size === 0
       ? setSizeError("Choose shoe size")
       : axios
-          .get(`http://localhost:4000/user?id=${user}`)
+          .get(`http://localhost:4000/user/${user}`)
           .then((res) => {
-            const existingCart = res.data[0].cart || []
+            const existingCart = res.data.cart || []
             const updatedCart = [...existingCart,...cartItems]
-            return axios.patch(`http://localhost:4000/user/${user}`, {
+            axios.patch(`http://localhost:4000/user/${user}`, {
               cart: updatedCart,
-            });
+            });  
           })
-
           .then(() => {
             toast.success("Product added to cart");
           })

@@ -12,33 +12,33 @@ function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [user, setUser] = useState("");
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:4000/user")
+  //     .then((res) => {
+  //       const user = res.data[0].id;
+  //       setUser(user);
+
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
+  // }, []);
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/user")
-      .then((res) => {
-        const user = res.data[0].id;
-        setUser(user);
-        
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    setUser(localStorage.getItem("userId"));
   }, []);
-  
+
   useEffect(() => {
-    if(user){
-      axios.get(`http://localhost:4000/user/${user}`).then((res) => {
-        if(res.data.length >0 && res.data[0].cart){
-          
-          setCartItems(res.data[0].cart);
-        }else {
-          toast.error("Not found cart items in this user")
-        }
-        
-      })
-      .catch((err)=>{
-        toast.error(err.message)
-      })
+    if (user) {
+      axios
+        .get(`http://localhost:4000/user/${user}`)
+        .then((res) => {
+          console.log(res.data.cart);
+          setCartItems(res.data.cart)
+        })
+        .catch((err) => {
+          toast.error(err.message);
+        });
     }
   }, [user]);
 
@@ -61,7 +61,6 @@ function Cart() {
       .catch((err) => {
         toast.error(err.message);
         console.log(err.message);
-        
       });
   };
   const handleDelete = (id) => {
@@ -71,9 +70,9 @@ function Cart() {
       .then(() => {
         setCartItems(updatedCart);
       })
-      .catch((err)=>{
-        toast.error(err.message)
-      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   return (

@@ -21,11 +21,18 @@ function Navbar() {
   const [allItems, setAllItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [user, setUser] = useState("");
   useEffect(() => {
-    axios.get("http://localhost:4000/cart").then((res) => {
-      setCartItems(res.data);
-    });
-  }, [cartItems]);
+    setUser(localStorage.getItem("userId"));
+  },[]);
+  useEffect(() => {
+    if(user){
+      axios.get(`http://localhost:4000/user/${user}`).then((res) => {
+        const cart = res.data.cart
+        setCartItems(cart);
+      });
+    }
+  }, [user,cartItems]);
   useEffect(() => {
     axios
       .get("http://localhost:4000/items")
