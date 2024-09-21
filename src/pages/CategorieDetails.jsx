@@ -2,8 +2,7 @@ import React from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-import ItemDisplay from "./ItemDisplay";
+import ItemDisplay from "../components/ItemDisplay";
 function CategorieDetails() {
   const { categrieType } = useParams();
   const { categorieGender } = useOutletContext();
@@ -19,7 +18,7 @@ function CategorieDetails() {
       });
   }, [categrieType, categorieGender]);
 
-  return <ItemDisplay value={items} />;
+  return <ItemDisplay value={items} gender={categorieGender} type={categrieType}/>;
 }
 
 export default CategorieDetails;
