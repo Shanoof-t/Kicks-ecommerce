@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import logo from "../../assets/logo/Logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,26 +12,23 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import axios from "axios";
-
+import { CartContext } from "../../context/CartProvider";
 function Navbar() {
   const navigate = useNavigate();
-  const [showDropdown, setShowDropdown] = useState(false); 
-  const [showMobileMenu, setShowMobileMenu] = useState(false); 
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showMobileCategories, setShowMobileCategories] = useState(false);
   const [searchVisible, setSearchVisible] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [allItems, setAllItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
-  const [user, setUser] = useState("");
-  const [isSubmit, setIsSubmit] = useState(false);
 
- 
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+  const [user, setUser] = useState(null);
   useEffect(() => {
     setUser(localStorage.getItem("userId"));
   }, []);
-
-
   useEffect(() => {
     if (user) {
       axios
@@ -46,9 +43,7 @@ function Navbar() {
     } else {
       setCartItems([]);
     }
-  }, [user,cartItems]); 
-
-
+  }, [user, setCartItems]);
   useEffect(() => {
     axios
       .get("http://localhost:4000/items")
@@ -75,14 +70,12 @@ function Navbar() {
     setShowDropdown((prevState) => !prevState);
   };
 
-
   const toggleMobileMenu = () => {
     setShowMobileMenu((prevState) => !prevState);
     if (showMobileMenu) {
       setShowMobileCategories(false);
     }
   };
-
 
   const toggleMobileCategories = () => {
     setShowMobileCategories((prevState) => !prevState);
@@ -111,20 +104,15 @@ function Navbar() {
   return (
     <header className="container bg-white shadow-md py-3 rounded-b-2xl fixed z-10 w-full">
       <div className="container mx-auto flex justify-between items-center px-4">
-    
         <div className="flex items-center space-x-8 ">
-      
           <ul className="hidden md:flex space-x-8 text-sm font-semibold">
             <li className="hover:text-secondaryColor">
               <Link to="/">Home</Link>
             </li>
-            <li
-              className="relative cursor-pointer "
-              onClick={toggleDropdown}
-            >
+            <li className="relative cursor-pointer " onClick={toggleDropdown}>
               <span className="hover:text-secondaryColor">Categories</span>
               <FontAwesomeIcon icon={faCaretDown} className="ms-1.5" />
-             
+
               <Transition
                 show={showDropdown}
                 enter="transition ease-out duration-200 transform"
@@ -152,7 +140,6 @@ function Navbar() {
             </li>
           </ul>
 
-       
           <div className="md:hidden relative">
             <button
               onClick={toggleMobileMenu}
@@ -174,7 +161,7 @@ function Navbar() {
                 <Link to="/" onClick={toggleMobileMenu}>
                   <li className="px-4 py-2 hover:bg-gray-100">Home</li>
                 </Link>
-             
+
                 <li
                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer relative flex items-center justify-between"
                   onClick={toggleMobileCategories}
@@ -187,7 +174,7 @@ function Navbar() {
                     } transition-transform duration-200`}
                   />
                 </li>
-                
+
                 <Transition
                   show={showMobileCategories}
                   enter="transition ease-out duration-200 transform"
@@ -217,7 +204,6 @@ function Navbar() {
           </div>
         </div>
 
-    
         <div className="flex items-center">
           <Link to="/">
             <img src={logo} alt="KICKS Logo" className="h-6 md:h-6" />
@@ -228,7 +214,11 @@ function Navbar() {
         <div className="flex items-center space-x-3 ">
           {/* Search */}
           <div className="relative">
-            <button onClick={toggleSearch} className="focus:outline-none" aria-label="Toggle Search">
+            <button
+              onClick={toggleSearch}
+              className="focus:outline-none"
+              aria-label="Toggle Search"
+            >
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
                 className="text-lg p-2"
@@ -280,7 +270,6 @@ function Navbar() {
             </Transition>
           </div>
 
-    
           <Link to="/cart">
             <button className="relative p-2" aria-label="View Cart">
               <FontAwesomeIcon icon={faCartShopping} className="text-lg" />
@@ -290,8 +279,11 @@ function Navbar() {
             </button>
           </Link>
 
-     
-          <button className="p-2" onClick={handleProfile} aria-label="User Profile">
+          <button
+            className="p-2"
+            onClick={handleProfile}
+            aria-label="User Profile"
+          >
             <FontAwesomeIcon icon={faUser} className="text-lg" />
           </button>
         </div>

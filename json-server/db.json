@@ -8,33 +8,13 @@
       "isAdmin": true
     },
     {
-      "id": "c242",
+      "id": "b235",
       "firstName": "shanoof",
       "lastName": "t",
       "email": "shanoof.001@gmail.com",
       "password": "123456",
       "cart": [],
-      "order": [
-        {
-          "orderId": "03dc1007-4510-4ba3-83bf-ca5c1a08c719",
-          "email": "shanoof.001@gmail.com",
-          "firstName": "shanoof",
-          "lastName": "t",
-          "address": "perinthalmanna",
-          "phone": "9961628079",
-          "paymentMethod": "cash",
-          "product": [
-            {
-              "name": "Nike Air Max 90 LTR",
-              "productId": "13",
-              "size": "3",
-              "quantity": 1,
-              "imageURL": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/c3c11af6-1a5f-44e0-aa98-783656b35bf5/AIR+JORDAN+1+LOW+FLYEASE.png",
-              "price": 110
-            }
-          ]
-        }
-      ]
+      "order": []
     }
   ],
   "items": [

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -9,26 +9,30 @@ function Cart() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const [cartItems, setCartItems] = useState([]);
+
   const [totalPrice, setTotalPrice] = useState(0);
-  const [user, setUser] = useState("");
   
+  const [cartItems, setCartItems] = useState([]);
+  const [user, setUser] = useState(null);
   useEffect(() => {
     setUser(localStorage.getItem("userId"));
   }, []);
-
   useEffect(() => {
     if (user) {
       axios
         .get(`http://localhost:4000/user/${user}`)
         .then((res) => {
-          setCartItems(res.data.cart)
+          const cart = res.data.cart;
+          setCartItems(cart);
         })
         .catch((err) => {
-          toast.error(err.message);
+          console.log(err.message);
         });
+    } else {
+      setCartItems([]);
     }
   }, [user]);
+  
 
   useEffect(() => {
     const total = cartItems.reduce((acc, val) => {

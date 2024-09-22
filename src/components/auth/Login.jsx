@@ -1,10 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AdminContext } from "../../App";
-import { useContext } from "react";
+
 function Login() {
-  const {setAdmin}=useContext(AdminContext)
+
   const navigate = useNavigate();
   const initailValues = {
     email: "",
@@ -45,7 +44,7 @@ function Login() {
           error.password = "Your password is incorrect";
         }else if(matchedUser.isAdmin){
           localStorage.setItem("adminId",matchedUser.id)
-          setAdmin(true)
+          
           navigate('/admin')
         }
          else {
@@ -54,6 +53,7 @@ function Login() {
           localStorage.setItem("lastName", matchedUser.lastName);
           localStorage.setItem("email", matchedUser.email);
         }
+        
       } catch (error) {
         console.log(error);
       }
