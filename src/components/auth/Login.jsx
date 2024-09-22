@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { AdminContext } from "../../App";
+import { useContext } from "react";
 function Login() {
-  const navigateToRegister = useNavigate();
-  const navigateToHome = useNavigate();
+  const {setAdmin}=useContext(AdminContext)
+  const navigate = useNavigate();
   const initailValues = {
     email: "",
     password: "",
@@ -33,18 +34,21 @@ function Login() {
     }
     if (Object.keys(error).length === 0) {
       try {
-        const response = await axios.get("http://localhost:4000/user");
+        const response = await axios.get("http://localhost:4000/user").catch((err)=>console.log("Can't get users"+err.message))
         const users = response.data;
-        console.log(users);
-
+        
         const matchedUser = users.find((obj) => values.email === obj.email);
-        console.log(matchedUser);
-
+       
         if (!matchedUser) {
           error.email = "Your email is incorrect";
         } else if (values.password !== matchedUser.password) {
           error.password = "Your password is incorrect";
-        } else {
+        }else if(matchedUser.isAdmin){
+          localStorage.setItem("adminId",matchedUser.id)
+          setAdmin(true)
+          navigate('/admin')
+        }
+         else {
           localStorage.setItem("userId", matchedUser.id);
           localStorage.setItem("firstName", matchedUser.firstName);
           localStorage.setItem("lastName", matchedUser.lastName);
@@ -58,7 +62,7 @@ function Login() {
   };
   useEffect(() => {
     if (Object.keys(loginError).length === 0 && isSubmit) {
-      navigateToHome("/");
+      navigate("/");
     }
   }, [loginError]);
   return (
@@ -99,7 +103,7 @@ function Login() {
           <p className="text-gray-700 mb-2">
             <span>Don't have an account? </span>
             <button
-              onClick={() => navigateToRegister("/register")}
+              onClick={() => navigate("/register")}
               className="text-thirdColor "
             >
               Create your <strong>Kicks</strong> account

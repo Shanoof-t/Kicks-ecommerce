@@ -1,6 +1,13 @@
 {
   "user": [
     {
+      "id": "c241",
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "password": "admin@123",
+      "isAdmin": true
+    },
+    {
       "id": "c242",
       "firstName": "shanoof",
       "lastName": "t",
