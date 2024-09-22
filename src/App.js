@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import Login from "./components/auth/Login";
@@ -6,18 +6,6 @@ import Register from "./components/auth/Register";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import ProductDetails from "./pages/ProductDetails";
-import MenCategories from "./pages/Categories/Men Categories/MenCategories";
-import WomenCategories from "./pages/Categories/Women Categories/WomenCategories";
-import MenCasual from "./pages/Categories/Men Categories/MenCasual";
-import MenFootball from "./pages/Categories/Men Categories/MenFootball";
-import MenRunning from "./pages/Categories/Men Categories/MenRunning";
-import WomenCasual from "./pages/Categories/Women Categories/WomenCasual";
-import WomenFootball from "./pages/Categories/Women Categories/WomenFootball";
-import WomenRunning from "./pages/Categories/Women Categories/WomenRunning";
-import KidsCategories from "./pages/Categories/Kids Categories/KidsCategories";
-import KidsCasual from "./pages/Categories/Kids Categories/KidsCasual";
-import KidsFootball from "./pages/Categories/Kids Categories/KidsFootball";
-import KidsRunning from "./pages/Categories/Kids Categories/KidsRunning";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
@@ -27,13 +15,22 @@ import Categorie from "./pages/Categorie";
 import AllItems from "./pages/AllItems";
 import CategorieDetails from "./pages/CategorieDetails";
 import ItemDisplay from "./components/ItemDisplay";
+import Dashboard_Home from "./admin/Dashboard_Home";
+import AllProducts_Dash from "./admin/AllProducts_Dash";
 function App() {
+  const location = useLocation();
+  const hideComponent =
+    location.pathname === "/login" ||
+    location.pathname === "/register" ||
+    location.pathname === "/admin" ||
+    location.pathname === "/productlist"
   return (
     <div className="container mx-auto">
-      <Navbar />
+      {!hideComponent && <Navbar />}
 
       <div className="main">
         <Routes>
+          {/* User Routes */}
           <Route path="/" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
@@ -52,9 +49,14 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="orderdetails" element={<OrderDetails />} />
           <Route path="*" element={<NotFound />} />
+
+          {/* Admin Routes */}
+
+          <Route path="admin" element={<Dashboard_Home />} />
+          <Route path="productlist" element={<AllProducts_Dash />} />
         </Routes>
       </div>
-      <Footer />
+      {!hideComponent && <Footer />}
     </div>
   );
 }
