@@ -13,7 +13,7 @@ function AllProducts_Dash() {
       .catch((err) => console.log(err.message));
   }, []);
 
-  console.log(items);
+
 
   return (
     <div className="ms-64 p-4">
