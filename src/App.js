@@ -17,6 +17,7 @@ import CategorieDetails from "./pages/CategorieDetails";
 import ItemDisplay from "./components/ItemDisplay";
 import Dashboard_Home from "./admin/Dashboard_Home";
 import AllProducts_Dash from "./admin/AllProducts_Dash";
+import Dash_Header from "./admin/components/Dash_Header";
 function App() {
   const location = useLocation();
   const hideComponent =
@@ -25,9 +26,9 @@ function App() {
     location.pathname === "/admin" ||
     location.pathname === "/productlist"
   return (
-    <div className="container mx-auto">
+    <div className={hideComponent ? '' : 'container mx-auto'}>
       {!hideComponent && <Navbar />}
-
+      {hideComponent && <Dash_Header />}
       <div className="main">
         <Routes>
           {/* User Routes */}
@@ -51,7 +52,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
 
           {/* Admin Routes */}
-
+          
           <Route path="admin" element={<Dashboard_Home />} />
           <Route path="productlist" element={<AllProducts_Dash />} />
         </Routes>

@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const navigateToRegister = useNavigate();
-  const navigateToHome = useNavigate();
+  const navigate = useNavigate();
+
   const initailValues = {
     email: "",
     password: "",
@@ -44,6 +44,10 @@ function Login() {
           error.email = "Your email is incorrect";
         } else if (values.password !== matchedUser.password) {
           error.password = "Your password is incorrect";
+        }
+        else if(matchedUser.isAdmin){
+          localStorage.setItem("adminId",matchedUser.id)
+          navigate('/admin')
         } else {
           localStorage.setItem("userId", matchedUser.id);
           localStorage.setItem("firstName", matchedUser.firstName);
@@ -58,7 +62,7 @@ function Login() {
   };
   useEffect(() => {
     if (Object.keys(loginError).length === 0 && isSubmit) {
-      navigateToHome("/");
+      navigate("/");
     }
   }, [loginError]);
   return (
@@ -99,7 +103,7 @@ function Login() {
           <p className="text-gray-700 mb-2">
             <span>Don't have an account? </span>
             <button
-              onClick={() => navigateToRegister("/register")}
+              onClick={() => navigate("/register")}
               className="text-thirdColor "
             >
               Create your <strong>Kicks</strong> account
